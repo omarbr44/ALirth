@@ -5,9 +5,9 @@ export default {
   theme: {
     extend: {
       colors:{
-        "site-blue": "#48b4c3",
-        "site-dark-blue": "#008093",
-        "site-text-grey": "#828282",
+        "site-primary": "#C4A159",
+        "site-secondary": "#131413",
+        "site-grey-secondary": "#807D6B",
       }
     },
     container: {
