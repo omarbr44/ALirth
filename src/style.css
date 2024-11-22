@@ -45,3 +45,8 @@
   .d-ltr {
     direction: ltr;
   }
+  .error-text {
+    font-size: small;
+    color: #EF4444;
+    margin: 5px 0;
+  }

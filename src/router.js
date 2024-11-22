@@ -10,6 +10,26 @@ const router = createRouter({
       name: 'home',
       component: Home,
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./page/Login.vue'),
+    },
+    {
+      path: '/forgetpassword',
+      name: 'forgetpassword',
+      component: () => import('./page/ForgetPassword.vue'),
+    },
+    {
+      path: '/otp',
+      name: 'otp',
+      component: () => import('./page/OTPPage.vue'),
+    },
+    {
+      path: '/changepassword',
+      name: 'changepassword',
+      component: () => import('./page/ChangePassword.vue'),
+    },
  /*    {
       path: '/signup',
       name: 'signup',

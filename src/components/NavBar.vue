@@ -9,7 +9,7 @@
                   تسجيل حساب جديد
                 </RouterLink>
                 <RouterLink 
-                  to=""
+                  to="/login"
                   class=" bg-white text-site-primary py-3 px-4 rounded-lg"
                   >
                   تسجيل الدخول
@@ -56,9 +56,13 @@
                   >
                   الرئيسية
                 </RouterLink>
-
             </div>
-            <img src="/img/Logo.png" alt="Logo">
+            <RouterLink 
+              to="/"
+              class=""
+              >
+              <img src="/img/Logo.png" alt="Logo">
+            </RouterLink>
         </nav>
     </div>
 </template>
