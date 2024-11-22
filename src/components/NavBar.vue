@@ -3,7 +3,7 @@
         <nav class="flex justify-center items-center gap-16 py-8 px-10 d-ltr w-full z-10">
             <div class="flex items-center gap-4">
                 <RouterLink 
-                  to=""
+                  to="signup"
                   class=" bg-site-primary text-white py-3 px-4 rounded-lg"
                   >
                   تسجيل حساب جديد

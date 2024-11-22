@@ -39,7 +39,7 @@
                     تأكيد
                 </button> -->
                 <RouterLink 
-                to=""
+                to="/forgetpassword"
                 class="w-full py-5 bg-[#F8F8F7] text-site-primary border border-site-primary rounded-full mt-5 block text-center"
                 >
                     رجوع
