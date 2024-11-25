@@ -1,120 +1,811 @@
 <template>
     <div class="bg-[#F8F8F7] overflow-hidden">
-        <section class="hero-section bg-center h-screen w-full">
-            <div class=" absolute w-full h-screen"
-            style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 17.5%, #F4F4F2 75.03%);"></div>
-            <div class=" relative z-20">
-                <h1 class="text-center text-6xl text-site-secondary font-extrabold pt-52" >محتوى ديني حصري، خصيصاً لك</h1>
-                <p class="text-center text-sm text-site-secondary my-10 w-1/2 mx-auto" >Stay up to date with the latest movie releases, exclusive promotions, and special offers by subscribing to our newsletter. Be the first to know about new additions to our library and exciting updates.</p>
-                <div class="flex justify-center w-full">
-                    <div class="relative w-[50%]">
-                        <input 
-                        type="text"
-                        placeholder="البريد الإلكتروني"
-                        class=" w-full rounded-full py-[22px] px-4">
-                        <div class="absolute left-1 top-1/2 -translate-y-1/2 bg-site-primary text-white px-16 py-[20px] rounded-full">المتابعة</div>
+        <section class="hero-swiper">
+            <swiper-container class="mySwiper" init="false">
+                <swiper-slide>
+                    <div class=" bg-center h-screen flex flex-col justify-center" style="background-image: url('/img/swiper-hero-img.png');">
+                        <div class=" px-28">
+                            <p class=" text-site-primary" >وثائقي | 20 الحلقة</p>
+                            <h1 class=" text-white font-bold text-6xl my-4" >رحلتي</h1>
+                            <div class="flex items-center gap-10 mt-10">
+                                <button class=" flex items-center justify-center gap-2 bg-site-primary rounded-full px-12 py-4">
+                                    <VideoPlayIcon />
+                                    <span class="text-white font-semibold">شاهد الان</span>
+                                </button>
+                                <button class=" flex items-center justify-center gap-5">
+                                    <span class="text-white font-semibold text-lg">Get Started</span>
+                                    <ArrowIcon />
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                </swiper-slide>
+                <swiper-slide>
+                    <div class=" bg-center h-screen flex flex-col justify-center" style="background-image: url('/img/swiper-hero-img2.png');">
+                        <div class=" px-28">
+                            <p class=" text-white" >بنامج فكري | 2 الحلقة</p>
+                            <h1 class=" text-white font-bold text-6xl my-4" >الانوار الكاشفة</h1>
+                            <div class="flex items-center gap-10 mt-10">
+                                <button class=" flex items-center justify-center gap-2 bg-site-primary rounded-full px-12 py-4">
+                                    <VideoPlayIcon />
+                                    <span class="text-white font-semibold">شاهد الان</span>
+                                </button>
+                                <button class=" flex items-center justify-center gap-5">
+                                    <span class="text-white font-semibold text-lg">Get Started</span>
+                                    <ArrowIcon />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide>
+                    <div class=" bg-center h-screen flex flex-col justify-center" style="background-image: url('/img/swiper-hero-img3.png');">
+                        <div class=" px-28">
+                            <p class=" text-white" >متنوع | الحلقة 33</p>
+                            <h1 class=" text-white font-bold text-6xl my-4" >القوافل المرئية</h1>
+                            <div class="flex items-center gap-10 mt-10">
+                                <button class=" flex items-center justify-center gap-2 bg-site-primary rounded-full px-12 py-4">
+                                    <VideoPlayIcon />
+                                    <span class="text-white font-semibold">شاهد الان</span>
+                                </button>
+                                <button class=" flex items-center justify-center gap-5">
+                                    <span class="text-white font-semibold text-lg">Get Started</span>
+                                    <ArrowIcon />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <div class="custom-pagination">
+                    <button class="swiper-pagination-bullet bg-white p-3 w-fit" data-index="0">
+                        <h1 class="">رحلتي</h1>
+                        <p class=" text-site-grey-secondary mb-2">برنامج وثائقي تسجيلي يصاحب فية الضيوف في ملتقي دعوي</p>
+                        <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
+                            <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
+                                <CalenderIcon />
+                                <span class=" text-site-grey-secondary">كل جمعة</span>
+                            </div>
+                            <div 
+                            class="swiper-pagination-bullet-button"
+                            >
+                                شاهد
+                            </div>
+                        </div>
+                    </button>
                 </div>
-
-            </div>
+                <div class="custom-pagination2">
+                    <button class="swiper-pagination-bullet bg-white p-3 w-fit" data-index="1">
+                        <h1 class="">الانوار الكاشفة</h1>
+                        <p class=" text-site-grey-secondary mb-2">بنامج فكري يصاحب فية الضيوف في ملتقي دعوي </p>
+                        <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
+                            <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
+                                <CalenderIcon />
+                                <span class=" text-site-grey-secondary">يعرض الان</span>
+                            </div>
+                            <div 
+                            class="swiper-pagination-bullet-button"
+                            >
+                                شاهد
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="custom-pagination3">
+                    <button class="swiper-pagination-bullet bg-white p-3 w-fit" data-index="2">
+                        <h1 class="">القوافل المرئية</h1>
+                        <p class=" text-site-grey-secondary mb-2">حلقات مميزة</p>
+                        <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
+                            <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
+                                <CalenderIcon />
+                                <span class=" text-site-grey-secondary">كل يوم حلقة جديدة</span>
+                            </div>
+                            <div 
+                            class="swiper-pagination-bullet-button"
+                            >
+                                شاهد
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </swiper-container>
         </section>
-        <div class="text-[#999999] text-5xl font-bold my-20">
-            <h1 class=" w-fit text-nowrap pb-10 translate-x-52">اللغة والأدب  / برامج فكرية  /  السيرة النبوية  /   <span class=" text-site-primary">الفقه والفتاوى</span>    /  البرامج </h1>
-            <h1 class="w-fit text-nowrap -translate-x-8">  الأسرة والطفل/  التزكية والسلوك /  الإنشاد  /  <span class=" text-site-primary">العلوم الحياتية</span>   /  الأسرة والطفل</h1>
-        </div>
-        <section class="cards-section my-10">
-            <h1 class="text-5xl text-site-secondary text-center font-bold mt-40 mb-20">كل <span class=" text-site-primary">البرامج</span> الدينية التي تفضلها</h1>
-            <div class="flex items-center justify-center gap-5">
-                <div class="bg-white w-[305px] min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                    <img src="/img/Course-Images.png" alt="Course-Images">
-                    <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
+        <section class="cards-section my-10 px-28">
+            <h1 class="text-5xl text-site-secondary font-bold mt-40 translate-y-[15px]">متابعة <span class=" text-site-primary">المشاهدة</span></h1>
+
+            <swiper-container class="mySwiper2" pagination="true" init="false">
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                         </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
                         </div>
                     </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                         </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-s rounded-3xl px-2 py-1">
-                            متوفر ٤ مواسم
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
                         </div>
                     </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+
+                        <div class="flex px-4 justify-between items-center my-2">
+                            <h1 class=" text-2xl font-semibold gradiant-text"
+                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                            >
+                                عنوان الحلقة
+                            </h1>
+                            <button>
+                                <DotsIcon />
+                            </button>
+                        </div>
+                        <div class="flex px-4 justify-between items-center mb-4">
+                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
+                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                الموسم الأول
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="flex px-4 items-center justify-between my-4">
+                            <div class="flex gap-2 items-center">
+                                <img src="/img/profile-img-course.png" alt="profile-img">
+                                <p class="text-[#999999]">أحمد بن سميط</p>
+                            </div>
+                            <div class="text-site-primary text-s flex items-center gap-1">
+                                <span>1h 47m</span> 
+                                <ClockIcon />  
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+            </swiper-container>
+        </section>
+        <section class="cards-section-2 my-10 px-28">
+            <div class="flex items-center gap-2 tag pt-10" >
+                <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                    الكل
                 </div>
-                <div class="bg-white w-[305px] min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                    <img src="/img/Course-Images.png" alt="Course-Images">
-                    <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-s rounded-3xl px-2 py-1">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    برامج فكرية
                 </div>
-                <div class="bg-white w-[305px] min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                    <img src="/img/Course-Images.png" alt="Course-Images">
-                    <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-s rounded-3xl px-2 py-1">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    اللغة والأدب
                 </div>
-                <div class="bg-white w-[305px] min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                    <img src="/img/Course-Images.png" alt="Course-Images">
-                    <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-s rounded-3xl px-2 py-1">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    السيرة النبوية
+                </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    الفقه والفتاوى
+                </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    البرامج
+                </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    الأسرة والطفل
+                </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    التزكية والسلوك
+                </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    الإنشاد
+                </div>
+                <div class=" bg-[#EBE9E5] text-site-secondary text-xs rounded-3xl px-3 py-2 font-semibold">
+                    العلوم الحياتية
                 </div>
             </div>
-            <h1 class="text-5xl text-site-secondary text-center font-bold mt-40 mb-20">مجموعة مختارة من <span class=" text-site-primary">العلماء و المحاضرين</span></h1>
+            <h1 class="text-5xl text-site-secondary font-bold mt-10 translate-y-[15px]">برامج موصي <span class=" text-site-primary">به</span></h1>
+            <swiper-container class="mySwiper3" pagination="true" init="false">
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                        <img src="/img/Course-Images.png" alt="Course-Images">
+                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                        </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Tafsir
+                        </div>
+                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                            Quranic
+                        </div>
+                    </div>
+                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
+                    <hr>
+                    <div class="flex px-4 items-center justify-between my-4">
+                        <div class="flex gap-2 items-center">
+                            <img src="/img/profile-img-course.png" alt="profile-img">
+                            <p class="text-[#999999]">أحمد بن سميط</p>
+                        </div>
+                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر ٤ مواسم
+                        </div>
+                    </div>
+                    </div>
+                </swiper-slide>
+
+            </swiper-container>
+        </section>
+        <section class="cards-section-3 my-10 px-28">
+            <h1 class="text-5xl text-site-secondary font-bold mt-16 translate-y-[15px]"> الحلقات الأكثر <span class=" text-site-primary">مشاهدة</span></h1>
+            <swiper-container class="mySwiper4" pagination="true" init="false">
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="flex gap-2 pt-16">
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
+                        <VideoPlayIcon />
+                    </div>
+                </swiper-slide>
+            </swiper-container>
+        </section>
+        <section class="avatars-section my-10 px-28">
+            <h1 class="text-5xl text-site-primary font-bold mt-28 mb-10">المحاضرين</h1>
             <div class="flex justify-center items-center gap-2">
                 <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
                     <img src="/img/Avatar.png" alt="avatar">
@@ -200,113 +891,11 @@
                         <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
                     </div>
                 </div>
-                <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar5.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div>
             </div>
         </section>
-        <section class="Ade-section pt-32 pb-60 mb-20" style="background: linear-gradient(180deg, #C4A159 0%, #A37C2A 100%);">
-            <h1 class="text-center text-5xl text-white font-bold" >بمكتبة محتوى واسعة</h1>
-            <p class="text-center text-white mb-64 mt-16 w-1/2 mx-auto" > استمتع بآلاف الحلقات والمجالس الدينية، وأكثر من ذلك. تضمن مكتبة المحتوى التي يتم تحديثها باستمرار أنك ستجد دائمًا شيئًا جديدًا لمشاهدته.</p>
-            <div class="flex items-center justify-center gap-5 relative">
-                <img src="/img/Cards-group.png" alt="Cards-group">
-                <img class="absolute" src="/img/Card-big.png" alt="Cards-group">
-  
-            </div>
-        </section>
-        <section class="Video-section px-8 mb-20">
+        <section class="Video-section my-10 px-28">
             <h1 class="text-5xl text-site-secondary font-bold mb-10" >البث <span class=" text-site-primary">المباشر</span></h1>
             <img class="px-20" src="/img/Video-section.png" alt="video">
-        </section>
-        <section class="faq-section px-8 mb-20 w-full">
-            <h1 class=" text-center text-5xl text-site-secondary font-bold mb-10" >الأسئلة <span class=" text-site-primary">الشائعة</span></h1>
-            <section class="faq-section px-32 py-20">
-                <div class="faq-conatiner mx-16 ">
-                    <div class="details">
-                        <details class="details__container bg-[#F4F4F2] px-10 py-6 rounded-lg">
-                        <summary class="details__summary">
-                            <h2 class="details__title text-2xl font-semibold">How much does MovieMax cost?</h2>
-                        </summary>
-                        </details>
-                        <div class="details__desc bg-[#F4F4F2] rounded-lg">
-                        <div class="details__desc-inner px-10">
-                            Absolutely! We offer a free one-month trial for new users. Sign up today and enjoy unlimited access to our vast collection of movies and TV shows during the trial period.
-                        </div>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <details class="details__container bg-[#F4F4F2] px-10 py-6 rounded-lg">
-                        <summary class="details__summary">
-                            <h2 class="details__title text-2xl font-semibold">How much does MovieMax cost?</h2>
-                        </summary>
-                        </details>
-                        <div class="details__desc bg-[#F4F4F2] rounded-lg">
-                        <div class="details__desc-inner px-10">
-                            Absolutely! We offer a free one-month trial for new users. Sign up today and enjoy unlimited access to our vast collection of movies and TV shows during the trial period.
-                        </div>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <details class="details__container bg-[#F4F4F2] px-10 py-6 rounded-lg">
-                        <summary class="details__summary">
-                            <h2 class="details__title text-2xl font-semibold">How much does MovieMax cost?</h2>
-                        </summary>
-                        </details>
-                        <div class="details__desc bg-[#F4F4F2] rounded-lg">
-                        <div class="details__desc-inner px-10">
-                            Absolutely! We offer a free one-month trial for new users. Sign up today and enjoy unlimited access to our vast collection of movies and TV shows during the trial period.
-                        </div>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <details class="details__container bg-[#F4F4F2] px-10 py-6 rounded-lg">
-                        <summary class="details__summary">
-                            <h2 class="details__title text-2xl font-semibold">How much does MovieMax cost?</h2>
-                        </summary>
-                        </details>
-                        <div class="details__desc bg-[#F4F4F2] rounded-lg">
-                        <div class="details__desc-inner px-10">
-                            Absolutely! We offer a free one-month trial for new users. Sign up today and enjoy unlimited access to our vast collection of movies and TV shows during the trial period.
-                        </div>
-                        </div>
-                    </div>
-                    <div class="details">
-                        <details class="details__container bg-[#F4F4F2] px-10 py-6 rounded-lg">
-                        <summary class="details__summary">
-                            <h2 class="details__title text-2xl font-semibold">How much does MovieMax cost?</h2>
-                        </summary>
-                        </details>
-                        <div class="details__desc bg-[#F4F4F2] rounded-lg">
-                        <div class="details__desc-inner px-10">
-                            Absolutely! We offer a free one-month trial for new users. Sign up today and enjoy unlimited access to our vast collection of movies and TV shows during the trial period.
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <div class=" relative z-20">
-                <h1 class="text-center text-6xl text-site-secondary font-extrabold pt-52" >محتوى ديني حصري، خصيصاً لك</h1>
-                <p class="text-center text-sm text-site-secondary my-10 w-1/2 mx-auto" >Stay up to date with the latest movie releases, exclusive promotions, and special offers by subscribing to our newsletter. Be the first to know about new additions to our library and exciting updates.</p>
-                <div class="flex justify-center w-full">
-                    <div class="relative w-[50%]">
-                        <input 
-                        type="text"
-                        placeholder="البريد الإلكتروني"
-                        class=" w-full rounded-full bg-[#F8F8F7] border border[#DBD9D1] py-[16px] px-4">
-                        <div class="absolute left-1 top-1/2 -translate-y-1/2 bg-site-primary text-white px-16 py-[14px] rounded-full">المتابعة</div>
-                    </div>
-                </div>
-
-            </div>
         </section>
         <footer class=" bg-white w-full rounded-s-3xl rounded-e-3xl pt-10">
             <div class="flex justify-evenly w-full">
@@ -362,103 +951,179 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import CalenderIcon from '../components/icon/CalenderIcon.vue';
+import VideoPlayIcon from '../components/icon/VideoPlayIcon.vue';
+import ArrowIcon from '../components/icon/ArrowIcon.vue';
+import DotsIcon from '../components/icon/3DotsIcon.vue';
+import ClockIcon from '../components/icon/ClockIcon.vue';
 
+onMounted(()=>{
+    const swiperEl = document.querySelector('.mySwiper');
+    const customPagination1 = document.querySelector('.custom-pagination');
+    const customPagination2 = document.querySelector('.custom-pagination2');
+    const customPagination3 = document.querySelector('.custom-pagination3');
+    const params = {
+        injectStyles: [`
+        .swiper-pagination {
+            justify-content: center !important;
+            display: flex !important;
+        }
+        .swiper-pagination-bullet {
+            opacity: 1;
+            width: 20%;
+            height: 145px;
+            border-radius: 0;
+            background: white;
+            text-align: justify;
+            padding: 0 1rem !important;
+            padding-bottom: 0.5rem !important;
+            margin: 0 2rem !important;
+            border-radius: 1rem;
+        }
+  
+        .swiper-pagination-bullet h1 {
+            font-size: large;
+            font-family: "Tajawal", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        .swiper-pagination-bullet p {
+            font-family: "Tajawal", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            color: #807D6B;
+        }
+        .swiper-pagination-bullet-outerdiv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #807D6B
+        }
+        .swiper-pagination-bullet-innerdiv {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Tajawal", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .swiper-pagination-bullet-button {
+            text-align: center;
+            background-color: #c4a159;
+            padding: 5px 0;
+            color: white;
+            border-radius: 5rem;
+            width: 35%;
+            font-family: "Tajawal", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+  
+        .swiper-pagination-bullet-active {
+            border: 3px solid #c4a159 !important;
+        }
+        `],
+        pagination: {
+          clickable: true,
+          renderBullet: function (index, className) {
+            /* return '<span class="' + className + '">' + (index + 1) + "</span>"; */
+            if(index == 0) {
+                return customPagination1.innerHTML;
+            }
+            if(index == 1) {
+                return customPagination2.innerHTML;
+            }
+            if(index == 2)
+                return customPagination3.innerHTML;
+          },
+        },
+      }  
+    Object.assign(swiperEl, params)
+    swiperEl.initialize();
+
+    const swiperEl2 = document.querySelector('.mySwiper2');
+    const params2 = {
+        injectStyles: [`
+        .swiper-pagination {
+            justify-content: center !important;
+            display: flex !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 40% !important;
+        }
+        .swiper-pagination-bullet {
+            width: 2rem;
+            height: 6px;
+            border-radius: 8px;
+            background-color: #DBD9D1
+        }
+  
+        .swiper-pagination-bullet-active {
+             background-color: #C4A159
+        }
+        `],
+      }  
+    Object.assign(swiperEl2, params2)
+    swiperEl2.initialize();
+
+    const swiperEl3 = document.querySelector('.mySwiper3');
+    const params3 = {
+        injectStyles: [`
+        .swiper-pagination {
+            justify-content: center !important;
+            display: flex !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 40% !important;
+        }
+        .swiper-pagination-bullet {
+            width: 2rem;
+            height: 6px;
+            border-radius: 8px;
+            background-color: #262626;
+            opacity: 1;
+        }
+  
+        .swiper-pagination-bullet-active {
+             background-color: #C4A159
+        }
+        `],
+      }  
+    Object.assign(swiperEl3, params3)
+    swiperEl3.initialize();
+
+    const swiperEl4 = document.querySelector('.mySwiper4');
+    const params4 = {
+        injectStyles: [`
+        .swiper-pagination {
+            justify-content: center !important;
+            display: flex !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 40% !important;
+        }
+        .swiper-pagination-bullet {
+            width: 2rem;
+            height: 6px;
+            border-radius: 8px;
+            background-color: #262626;
+            opacity: 1;
+        }
+  
+        .swiper-pagination-bullet-active {
+             background-color: #C4A159
+        }
+        `],
+      }  
+    Object.assign(swiperEl4, params4)
+    swiperEl4.initialize();
+})
 </script>
 
-<style scoped>
-.hero-section {
-    background-image: url('/img/hero-img.png');
+<style>
+.gradiant-text {
+    color: transparent;
+    background-clip: text;
 }
-
-           /* FAQ styling */
-           .details{
-        --padding: 10px;
-        padding-bottom: 15px;
-        margin-bottom: 5px;
-      }
-
-      .details + .details{
-        margin-top: 15px;
-      }
-
-      .details__title{
-        --width: 30px;
-        --height: 30px;
-        --radius: 100%;
-        --color: #C4A159;
-        margin:0;
-        padding: var(--padding) calc(var(--width) * 2) var(--padding) var(--padding);
-        cursor: pointer;
-        transition: all .2s ease-in-out;
-        position: relative;
-      }
-
-/*       .details__title:before,
-      .details__title:after{
-        content:'';
-        display: block;
-        width: var(--width);
-        height: var(--height);
-        background-color: var(--color);
-        position: absolute;
-        border-radius: var(--radius);
-        top: calc(50% - (var(--height) / 2));
-        inset-inline-end: calc(var(--width) / 2);
-        transition: all .2s ease-in-out;
-      } */
-      .details__title:before{
-        content:'+';
-        font-weight: 400;
-        font-size: larger;
-        color: white;
-        display: block;
-        width: var(--width);
-        height: var(--height);
-        background-color: var(--color);
-        position: absolute;
-        border-radius: var(--radius);
-        top: calc(50% - (var(--height) / 2));
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        inset-inline-start: calc(var(--width) / 2);
-        transition: all .2s ease-in-out;
-        padding-right: 7px;
-        padding-bottom: 3px
-      }
-
-      .details__title:after{
-        rotate: 90deg;
-      }
-
-      .details__container[open] .details__title:before{
-        content: '-';
-        padding-right: 10px;
-      }
-
-      .details__container[open] .details__title:after{
-        rotate: 135deg;
-      }
-
-      .details__summary::marker{
-        content:'';
-      }
-
-      .details__desc{
-        display: grid;
-        grid-template-rows: 0fr;
-        transition: all .2s ease-in-out;
-        overflow: hidden;
-        padding-inline: var(--padding);
-        pointer-events: none;
-      }
-
-      .details__container[open] + .details__desc{
-        grid-template-rows: 1fr;
-        padding-block: var(--padding);
-      }
-
-      .details__desc-inner{
-        min-height: 0;
-      }
 </style>

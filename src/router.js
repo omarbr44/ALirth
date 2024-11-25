@@ -1,14 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useUserStore } from './stores/user'
 
-import Home from './page/Home.vue';
+import LandingPage from './page/LandingPage.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: '/',
+      name: 'LandingPage',
+      component: LandingPage,
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: Home,
+      component: () => import('./page/Home.vue'),
     },
     {
       path: '/signup',

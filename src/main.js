@@ -5,6 +5,8 @@ import { createPinia } from 'pinia';
 import { createPersistedState } from 'pinia-plugin-persistedstate'
 import VOtpInput from "vue3-otp-input";
 import App from './App.vue'
+import { register } from 'swiper/element/bundle';
+register();
 
 const pinia = createPinia()
 pinia.use(createPersistedState())
