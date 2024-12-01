@@ -1122,8 +1122,5 @@ onMounted(()=>{
 </script>
 
 <style>
-.gradiant-text {
-    color: transparent;
-    background-clip: text;
-}
+
 </style>

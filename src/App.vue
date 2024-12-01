@@ -1,12 +1,13 @@
 <script setup>
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import NavBar from './components/NavBar.vue';
 
+const route = useRoute()
 </script>
 
 <template>
   <div>
-    <NavBar />
+    <NavBar v-if="route.path != '/stream-video'" />
     <RouterView />
   </div>
 </template>

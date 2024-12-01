@@ -40,6 +40,16 @@ const router = createRouter({
       name: 'changepassword',
       component: () => import('./page/ChangePassword.vue'),
     },
+    {
+      path: '/stream',
+      name: 'stream',
+      component: () => import('./page/StreamPage.vue'),
+    },
+    {
+      path: '/stream-video',
+      name: 'stream-video',
+      component: () => import('./page/StreamVideo.vue'),
+    },
  /*    {
       path: '/signup',
       name: 'signup',

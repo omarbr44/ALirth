@@ -50,3 +50,7 @@
     color: #EF4444;
     margin: 5px 0;
   }
+  .gradiant-text {
+    color: transparent;
+    background-clip: text;
+}
