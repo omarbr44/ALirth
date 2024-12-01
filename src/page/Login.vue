@@ -32,11 +32,11 @@
                 class=" font-bold text-site-primary w-full text-center block">
                     اعادة ضبط الرقم السري
                 </RouterLink>
-                <button 
-                class="w-full py-5 bg-site-primary text-white rounded-full mt-5"
+                <RouterLink to="/home"
+                class="w-full py-5 bg-site-primary text-white rounded-full mt-5 text-center block"
                 >
                     تأكيد
-                </button>
+                </RouterLink>
                 <RouterLink 
                 to="signup"
                 class="w-full py-5 bg-[#F8F8F7] text-site-primary border border-site-primary rounded-full mt-5 block text-center"
