@@ -8,35 +8,41 @@
                 <div class="mb-5">
                     <label for="email" class="block text-site-grey-secondary mb-2">البريد الإلكتروني</label>
                     <input
+                    v-model="user.email"
                     name="email"
                     type="email"
                     placeholder="email@email.com"
                     class="w-full bg-[#F8F8F7] h-[48px] py-2 px-6 rounded-full border"
-                    :class=" false ? 'border-[#EF4444]' : 'border-[#EBE9E5]'"
+                    :class=" requestConditions?.error?.email ? 'border-[#EF4444]' : 'border-[#EBE9E5]'"
                     >
-                    <p v-if="false" class="error-text">Error Text is displayed here, up 2 lines</p>
+                    <p v-if="requestConditions?.error?.email" class="error-text">{{ requestConditions.error.email[0] }}</p>
                 </div>
                 <div class="mb-5">
                     <label for="password" class="block text-site-grey-secondary mb-2">كلمة المرور</label>
                     <input
+                    v-model="user.password"
                     name="password"
                     type="password"
                     placeholder="********"
                     class="w-full bg-[#F8F8F7] h-[48px] py-2 px-6 rounded-full border border-[#EBE9E5]"
-                    :class=" true ? 'border-[#EF4444]' : 'border-[#EBE9E5]'"
+                    :class=" requestConditions?.error?.password ? 'border-[#EF4444]' : 'border-[#EBE9E5]'"
                     >
-                    <p v-if="true" class="error-text">Error Text is displayed here, up 2 lines</p>
+                    <p v-if="requestConditions?.error?.password" class="error-text">{{ requestConditions.error.password[0] }}</p>
                 </div>
                 <RouterLink
                 to="/forgetpassword"
                 class=" font-bold text-site-primary w-full text-center block">
                     اعادة ضبط الرقم السري
                 </RouterLink>
-                <RouterLink to="/home"
-                class="w-full py-5 bg-site-primary text-white rounded-full mt-5 text-center block"
+                <button 
+                class="w-full py-5 bg-site-primary text-white rounded-full mt-5 flex justify-center items-center"
+                @click.prevent="signinRequest"
                 >
-                    تأكيد
-                </RouterLink>
+                    <span v-if="!requestConditions.loading">
+                        تأكيد
+                    </span>
+                    <LoaderIcon v-else />
+                </button>
                 <RouterLink 
                 to="signup"
                 class="w-full py-5 bg-[#F8F8F7] text-site-primary border border-site-primary rounded-full mt-5 block text-center"
@@ -63,7 +69,37 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
+import { ref } from 'vue';
+import { usePostRequest } from '../composables/useRequest';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
+import { useUserStore } from '../stores/user';
 
+const router = useRouter()
+const userStore = useUserStore()
+
+const requestConditions = ref({
+    data: null,
+    loading: false,
+    error: null,
+    message: null,
+})
+const user = ref({
+    email: null,
+    password: null,
+})
+const signinRequest = async () => {
+    requestConditions.value.loading = true
+    const { Data, Error} = await usePostRequest('accounts/login/',user.value)
+    requestConditions.value.loading = false
+    requestConditions.value.data = Data.value
+    if(Error.value)
+        requestConditions.value.error = Error.value
+    else if(requestConditions.value.data) {
+        userStore.signIn(requestConditions.value.data.authtoken,requestConditions.value.data.is_superuser,requestConditions.value.data.full_name,requestConditions.value.data.email,requestConditions.value.data.package_name,requestConditions.value.data.package_number)
+        router.push('/home')
+    }
+
+}
 </script>
