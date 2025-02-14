@@ -18,7 +18,7 @@ export default {
       sm: {'max': '640px'},
       md: {'max': '1024px',
             'min': '640px'} ,
-      lg: {'min': '1300px'} ,
+      lg: {'min': '1024px'} ,
     }
   },
   plugins: [],

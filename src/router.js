@@ -50,27 +50,31 @@ const router = createRouter({
       name: 'stream-video',
       component: () => import('./page/StreamVideo.vue'),
     },
- /*    {
-      path: '/signup',
-      name: 'signup',
-      component: () => import('./page/SignUp.vue'),
+    {
+      path: '/categories',
+      name: 'categories',
+      component: () => import('./page/Categories.vue'),
     },
     {
-      path: '/signin',
-      name: 'signin',
-      component: () => import('./page/SignIn.vue'),
+      path: '/category-detailes',
+      name: 'category-detailes',
+      component: () => import('./page/CategoryDetailes.vue'),
     },
     {
-      path: '/passwordresubmit-email',
-      name: 'passwordresubmit-email',
-      component: () => import('./page/PasswordResubmitEmail.vue'),
+      path: '/teachers',
+      name: 'teachers',
+      component: () => import('./page/TeachersIndex.vue'),
     },
     {
-      path: '/passwordresubmit-password',
-      name: 'passwordresubmit-password',
-      component: () => import('./page/PasswordResubmitPassword.vue'),
-    }, */
-
+      path: '/teacher-view',
+      name: 'teacher-view',
+      component: () => import('./page/TeacherView.vue'),
+    },
+    {
+      path: '/stream-index',
+      name: 'stream-index',
+      component: () => import('./page/StreamIndex.vue'),
+    },
   ],
 });
 /* router.beforeEach((to, from, next) => {

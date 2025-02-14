@@ -48,7 +48,7 @@
                 <span>الموسم الأول</span>
                 <span>V</span>
             </div>
-            <div class="flex items-center gap-5 gap-y-10     my-10 flex-wrap">
+            <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
                 <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
                         <img src="/img/Course-Images.png" alt="Course-Images">
                         <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
