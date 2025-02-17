@@ -1,90 +1,15 @@
 <template>
     <div class="bg-black overflow-hidden w-full">
-        <section class="w-full px-32 md:px-20 sm:px-8 flex justify-center flex-wrap gap-4 mt-64 mb-20">
-            <a 
-              href=""
+        <section class="w-full px-32 md:px-20 sm:px-8 flex flex-wrap gap-4 mt-64 mb-20">
+            <RouterLink
+              :to="'/category-detailes/'+category.id"
+              v-for="(category,index) in categories"
+              :key="index"
               class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
             >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
-            <a 
-              href=""
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; 5</span>
-            <span>Hadith</span>
-            </a>
+            <span>< &nbsp; {{ category.programs_count }}</span>
+            <span>{{ category.name }}</span>
+            </RouterLink>
         </section>
         <footer class=" bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
             <div class="flex justify-evenly w-full">
@@ -140,7 +65,15 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { useGetRequest } from '../composables/useRequest';
+import { RouterLink } from 'vue-router';
 
+const categories = ref()
+onMounted(async ()=>{
+  const { Data, Error} = await useGetRequest('categories/')
+  categories.value = Data.value.data.result
+})
 </script>
 
 <style>

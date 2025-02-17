@@ -1,17 +1,15 @@
 <template>
-  <div class="dark:bg-black overflow-hidden w-full">
+  <div class="dark:bg-black overflow-hidden w-full" v-if="programs">
     <section class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
       <div class="w-full flex sm:flex-col justify-center items-center gap-7">
         <div class="w-1/2 sm:w-full">
-          <img src="/img/Subtract.png" alt="img">
+          <img :src="teacher.image" alt="img">
         </div>
         <div class="w-1/2 sm:w-full">
           <h1 class="text-7xl md:text-4xl sm:text-3xl dark:text-white text-site-dark-primary font-bold">
-            الدكتور 
-          <br>
-            أحمد بن سميط
+          {{ teacher.name }}
           </h1>
-          <p class="text-[#9E9C9C] mt-5">بترومسيلة تتحرك نحو آفاق وطنية جديدة وكوادرها اكتسبت خبراتها من شركات عالمية قال الأستاذ محمد أحمد بن سميط المدير العام التنفيذي لشركة بترومسيلة أن الشركة تتحرك نحو آفاق وطنية جديدة عبر تكليفها من قبل الدولة ببناء محطتي كهرباء جديدة في مدينه عدن بقدرة 264 ميجاوات وساحل حضرموت بقدرة 100 ميجاوات.Dec 18, 2018</p>
+          <p class="text-[#9E9C9C] mt-5">{{ teacher.description  }}</p>
           <div class="mt-24 md:mt-16 sm:mt-10 translate-x-36 md:translate-x-20 sm:translate-x-0">
             <p class="font-bold text-site-primary mb-5">الأكثر مشاهدة</p>
             <div class="flex sm:flex-wrap gap-5">
@@ -25,43 +23,42 @@
       </div>
       <div class="w-full border-b text-white p-2 mt-20 flex items-center gap-3">
                 <button class="text-site-primary font-semibold">البرامج</button>
-                <button>الحلقات</button>
+                <!-- <button>الحلقات</button> -->
             </div>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
-                <div v-for="index in 10" class=" bg-site-dark-primary w-[23%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" class="w-full" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+              <RouterLink v-for="(program,index) in programs" :key="index" :to="'/stream/'+program.id" class=" bg-site-dark-primary w-[30%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
+                        <img :src="program.image" class="w-full" alt="Course-Images">
+                        <!-- <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
                             <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
+                        </div> -->
 
                         <div class="flex px-4 justify-between items-center my-2">
                             <h1 class=" text-2xl font-semibold gradiant-text"
                             style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
                             >
-                                عنوان الحلقة
+                                {{ program.name }}
                             </h1>
                             <button>
                                 <DotsIcon />
                             </button>
                         </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                          <div v-for="(tag,indexx) in program.name_index" :key="indexx" class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                              {{ tag.name }}
+                          </div>
                         </div>
+                        <p class="px-4 text-white mb-3">{{ program.description }}</p>
                         <hr>
                         <div class="flex px-4 items-center justify-between my-4">
                             <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
+                                <img :src="program.instructor.image" alt="profile-img" class=" w-12">
+                                <p class="text-white">{{ program.instructor.name }}</p>
                             </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
+                            <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر {{ program.season_count }} مواسم
                         </div>
-                </div>
+                        </div>
+                </RouterLink>
             </div>
     </section>  
     <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
@@ -131,3 +128,20 @@
     </footer>
   </div>
 </template>
+<script setup>
+import DotsIcon from '../components/icon/3DotsIcon.vue'
+import ClockIcon from '../components/icon/ClockIcon.vue'
+import { onMounted, ref, watch } from 'vue';
+import { useGetRequest } from '../composables/useRequest';
+import { RouterLink,useRoute } from 'vue-router';
+
+const route = useRoute()
+const teacher = ref()
+const programs = ref()
+onMounted(async ()=>{
+  const { Data} = await useGetRequest('instructors/'+route.params.id)
+  teacher.value = Data.value.data
+  const { Data:programss } = await useGetRequest('programes/?instructor='+route.params.id)
+  programs.value = programss.value.data.result
+})
+</script>

@@ -1,27 +1,27 @@
 <template>
-    <div class="bg-black overflow-hidden">
-        <section class="hero-section bg-center h-screen w-full flex flex-col justify-end">
+    <div v-if="episodes" class="bg-black overflow-hidden">
+        <section class="hero-section bg-center h-screen w-full flex flex-col justify-end" :style="{ backgroundImage: `url(${episodes[0].image})` }">
             <div class="w-2/4 px-16" >
                 <div class="flex gap-6 items-center">
-                    <p class="text-white text-sm">51m</p>
-                    <p class="text-white text-sm">Season 1 | Episode 1</p>
-                    <p class="text-white text-sm">2021</p>
+                    <p class="text-white text-sm">{{ turnSecondsToHour(episodes[0].time) }}</p>
+                    <p class="text-white text-sm">Season 1 | {{ episodes[0].name }}</p>
+                    <p class="text-white text-sm">{{ episodes[0].create_at.slice(0,4) }}</p>
                 </div>
                 <p class="text-white text-sm my-5">
-                    أسهل طريقة لتعليم أبناءك أسماء الله الحسنى ( #منظومة )<br>إنّ لله تسعة وتسعين اسماً من حفظها، وعرفها، أو عمل بمقتضاها، وتدبر معناها دخل الجنة، <br>ولكن الأهم من عامل الحفظ هو عامل الاقتداء بها.
+                    {{ episodes[0].description }}
                 </p>
                 <div class="w-full flex flex-col bg-[#131209] rounded-full -translate-y-1">
                     <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                 </div>
                 <div class="w-full flex justify-between items-center">
                     <p class="text-white text-sm">60%</p>
-                    <p class="text-white text-sm">٥١ دقيقة</p>
+                    <p class="text-white text-sm">{{ turnSecondsToHour(episodes[0].time) }}</p>
                 </div>
             </div>
             <div class="flex items-center px-16 py-4  justify-between mt-4 bg-black bg-opacity-80">
                 <div class="flex items-center gap-4">
                 <RouterLink 
-                  to="stream-video"
+                  :to="'/stream-video/'+episodes[0].id"
                   class=" bg-site-primary text-white py-3 px-4 rounded-3xl"
                   >
                   استكمال المشاهدة
@@ -44,13 +44,19 @@
                 <p class=" pb-1">عن الشيخ محمد</p>
             </div>
             <div class="w-full h-[1px] bg-[#807D6B]"></div>
-            <div class="w-52 flex items-center justify-between border border-[#807D6B] rounded-3xl p-2 px-4 text-[#BFBCB0] my-6">
+            <!-- <div class="w-52 flex items-center justify-between border border-[#807D6B] rounded-3xl p-2 px-4 text-[#BFBCB0] my-6">
                 <span>الموسم الأول</span>
                 <span>V</span>
+            </div> -->
+            <div class="select-container my-10">
+                <select v-model="seasonValue">
+                    <option value="" selected>اختر الخطة</option>
+                    <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
+                </select>
             </div>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
+                <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class=" bg-site-dark-primary w-[30%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
+                        <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="Course-Images" class="w-full h-2/5">
                         <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
                             <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                         </div>
@@ -66,398 +72,24 @@
                             </button>
                         </div>
                         <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
+                            <p class=" text-white font-bold" >{{ ep.name }}</p>
                             <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
+                                {{ ep.season }}
                             </div>
                         </div>
                         <hr>
                         <div class="flex px-4 items-center justify-between my-4">
                             <div class="flex gap-2 items-center">
                                 <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
+                                <p class="text-white">{{ ep.instructor.name }}</p>
                             </div>
                             <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
+                                <span>{{ turnSecondsToHour(ep.time) }}</span> 
+                                <!-- <span>1h 47m</span> --> 
                                 <ClockIcon />  
                             </div>
                         </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-                <div class=" bg-site-dark-primary w-[23%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                </div>
-
+                </RouterLink>
             </div>
         </section>
         <footer class=" bg-site-dark-primary w-full rounded-s-3xl rounded-e-3xl pt-10">
@@ -514,17 +146,65 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
 import HeartIcon from '../components/icon/HeartIcon.vue'
 import ShareIcon from '../components/icon/ShareIcon.vue'
 import DotsIcon from '../components/icon/3DotsIcon.vue'
 import ClockIcon from '../components/icon/ClockIcon.vue'
+import { onMounted, ref, watch } from 'vue';
+import { useGetRequest } from '../composables/useRequest';
+import { RouterLink,useRoute } from 'vue-router';
+import turnSecondsToHour from '../composables/useSecondsToHour';
 
+const route = useRoute()
+const program = ref()
+const episodes = ref()
+const seasons = ref()
+const seasonValue = ref()
+onMounted(async ()=>{
+  const { Data} = await useGetRequest('programes/'+route.params.id)
+  program.value = Data.value.data
+  const { Data:seasonss} = await useGetRequest('seasons/?program='+route.params.id)
+  seasons.value = seasonss.value.data
+  const { Data:eps} = await useGetRequest('episodes/?season='+seasons.value[0].id)
+  episodes.value = eps.value.data.result
+  seasonValue.value = seasons.value[0].id
+})
+
+watch(seasonValue, async ()=>{
+    const { Data } = await useGetRequest('episodes/?season='+seasonValue.value)
+    episodes.value = Data.value.data.result
+    console.log(episodes.value)
+})
 </script>
 
 <style scoped>
 .hero-section {
-    background-image: url('/img/streamImg.png');
     background-size: cover
+}
+.select-container {
+    position: relative;
+    width: 300px;
+}
+.select-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: black;
+    cursor: pointer;
+}
+.select-container::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: white;
 }
 </style>

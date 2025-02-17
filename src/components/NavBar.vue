@@ -89,7 +89,7 @@
         </RouterLink>
         <RouterLink to="/categories">الفئات</RouterLink>
         <RouterLink to="/programs">البرامج</RouterLink>
-        <RouterLink to="/instructors">المحاضرين</RouterLink>
+        <RouterLink to="/teachers">المحاضرين</RouterLink>
       </div>
 
       <!-- Favorite Menu (Desktop) -->
@@ -140,7 +140,7 @@
         </RouterLink>
         <RouterLink to="/categories" class="block px-4 py-2 text-site-secondary dark:text-white">الفئات</RouterLink>
         <RouterLink to="/programs" class="block px-4 py-2 text-site-secondary dark:text-white">البرامج</RouterLink>
-        <RouterLink to="/instructors" class="block px-4 py-2 text-site-secondary dark:text-white">المحاضرين</RouterLink>
+        <RouterLink to="/teachers" class="block px-4 py-2 text-site-secondary dark:text-white">المحاضرين</RouterLink>
         <RouterLink to="/favorites" class="block px-4 py-2 text-site-secondary dark:text-white flex items-center gap-2">
           <p>القائمة المفضلة</p>
           <svg

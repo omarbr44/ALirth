@@ -7,7 +7,7 @@ const route = useRoute()
 
 <template>
   <div>
-    <NavBar v-if="route.path != '/stream-video'" />
+    <NavBar v-if="!route.path.includes('stream-video')" />
     <RouterView />
   </div>
 </template>

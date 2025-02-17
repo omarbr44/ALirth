@@ -41,12 +41,12 @@ const router = createRouter({
       component: () => import('./page/ChangePassword.vue'),
     },
     {
-      path: '/stream',
+      path: '/stream/:id',
       name: 'stream',
       component: () => import('./page/StreamPage.vue'),
     },
     {
-      path: '/stream-video',
+      path: '/stream-video/:id',
       name: 'stream-video',
       component: () => import('./page/StreamVideo.vue'),
     },
@@ -56,7 +56,7 @@ const router = createRouter({
       component: () => import('./page/Categories.vue'),
     },
     {
-      path: '/category-detailes',
+      path: '/category-detailes/:id',
       name: 'category-detailes',
       component: () => import('./page/CategoryDetailes.vue'),
     },
@@ -66,7 +66,7 @@ const router = createRouter({
       component: () => import('./page/TeachersIndex.vue'),
     },
     {
-      path: '/teacher-view',
+      path: '/teacher-view/:id',
       name: 'teacher-view',
       component: () => import('./page/TeacherView.vue'),
     },

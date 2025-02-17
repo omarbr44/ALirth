@@ -4,253 +4,18 @@
         <h1 class="text-5xl sm:text-3xl font-bold mt-20 mb-16 text-site-primary">المحاضرين</h1>
         <div class="flex flex-wrap justify-center items-center gap-4 p-4">
     <!-- Card 1 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
+    <RouterLink v-for="(teacher,index) in teachers" :key="index" :to="'/teacher-view/'+teacher.id" class="w-full sm:w-[48%] md:w-[30%] lg:w-[18%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
+      <img :src="teacher.image ? teacher.image :'/img/Avatar.png'" alt="avatar" class="w-16 h-16" />
+      <p class="text-site-grey-secondary font-bold mt-2 mb-3 text-center px-1">{{ teacher.name }}</p>
       <div class="flex items-center gap-2">
         <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
           <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
           <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
         </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
+        <p class="text-[#4E5566] font-medium text-center">{{ teacher.title }}</p>
       </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar2.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar3.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar4.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar5.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar3.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 7 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar4.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 8 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar5.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar2.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar3.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar4.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar5.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar3.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 7 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar4.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 8 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar5.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-    <!-- Card 7 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar4.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
-
-    <!-- Card 8 -->
-    <div class="w-full sm:w-[48%] md:w-[30%] lg:w-[15%] xl:w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] dark:bg-[#2D2D2D] flex flex-col items-center pt-6">
-      <img src="/img/Avatar5.png" alt="avatar" class="w-16 h-16" />
-      <p class="text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-      <div class="flex items-center gap-2">
-        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-          <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-          <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-        </svg>
-        <p class="text-[#4E5566] font-medium">معنا كلمة الله</p>
-      </div>
-    </div>
+    </RouterLink>
   </div>
     </section>  
     <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
@@ -320,3 +85,14 @@
     </footer>
   </div>
 </template>
+<script setup>
+import { onMounted, ref } from 'vue';
+import { useGetRequest } from '../composables/useRequest';
+import { RouterLink } from 'vue-router';
+
+const teachers = ref()
+onMounted(async ()=>{
+  const { Data, Error} = await useGetRequest('instructors/')
+  teachers.value = Data.value.data.result
+})
+</script>

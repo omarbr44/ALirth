@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-fit w-full bg-site-dark-primary">
+    <div v-if="episodes" class="flex h-fit w-full bg-site-dark-primary">
         <div class="w-[70%]"
              :class="videoFull ? 'w-full' : ''">
             <div class="flex justify-between items-center pt-10 px-10">
@@ -21,7 +21,7 @@
                 </RouterLink>
             </div>
             <div class=" w-full pb-8 pt-24 px-4">
-                    <video ref="video" onclick="play(event)" src="/img/wefadah-signin.webm" id="video" class="w-full h-full"></video>
+                    <video ref="video" onclick="play(event)" :src="currentEpisode.video_file" id="video" class="w-full h-full"></video>
             </div>
             <div class="">
                         <div class="timeline px-2">
@@ -32,47 +32,21 @@
                     </div>
 
         </div>
-        <div class=" px-6 flex flex-col gap-6 overflow-auto mt-24 mb-16"
+        <div class=" px-6 flex flex-col gap-6 overflow-auto mt-24 mb-16 h-[35rem]"
              :class="videoFull ? 'hidden' : ''">
-            <div class="w-52 flex items-center justify-between border border-[#807D6B] rounded-3xl p-2 px-4 text-[#BFBCB0] my-6">
-                <span>الموسم الأول</span>
-                <span>V</span>
+             <div class="select-container my-10">
+                <select v-model="seasonValue">
+                    <option value="" selected>اختر الخطة</option>
+                    <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
+                </select>
             </div>
-            <div class="flex items-center gap-4">
-                <img src="/img/streamImg.png" alt="img" class="w-32 h-18 rounded-lg">
+            <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class="flex items-center gap-4">
+                <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="img" class="w-32 h-18 rounded-lg">
                 <div>
-                    <p class="text-white font-semibold mb-4">برنامج  النور الكاشف</p>
-                    <p class=" text-[#BFBCB0] text-sm">59:00 دقيقة</p>
+                    <p class="text-white font-semibold mb-4">{{ ep.name }}</p>
+                    <p class=" text-[#BFBCB0] text-sm">{{ turnSecondsToHour(ep.time) }}</p>
                 </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <img src="/img/streamImg.png" alt="img" class="w-32 h-18 rounded-lg">
-                <div>
-                    <p class="text-white font-semibold mb-4">برنامج  النور الكاشف</p>
-                    <p class=" text-[#BFBCB0] text-sm">59:00 دقيقة</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <img src="/img/streamImg.png" alt="img" class="w-32 h-18 rounded-lg">
-                <div>
-                    <p class="text-white font-semibold mb-4">برنامج  النور الكاشف</p>
-                    <p class=" text-[#BFBCB0] text-sm">59:00 دقيقة</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <img src="/img/streamImg.png" alt="img" class="w-32 h-18 rounded-lg">
-                <div>
-                    <p class="text-white font-semibold mb-4">برنامج  النور الكاشف</p>
-                    <p class=" text-[#BFBCB0] text-sm">59:00 دقيقة</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <img src="/img/streamImg.png" alt="img" class="w-32 h-18 rounded-lg">
-                <div>
-                    <p class="text-white font-semibold mb-4">برنامج  النور الكاشف</p>
-                    <p class=" text-[#BFBCB0] text-sm">59:00 دقيقة</p>
-                </div>
-            </div>
+            </RouterLink>
         </div>
     
     </div>
@@ -128,21 +102,39 @@
 </template>
 
 <script setup>
-import { onMounted, ref, useTemplateRef } from 'vue';
+import { onMounted, ref, useTemplateRef, watch } from 'vue';
 import ShareIcon from '../components/icon/ShareIcon.vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import VideoPlayIcon from '../components/icon/VideoPlayIcon.vue';
 import VideoPauseIcon from '../components/icon/VideoPauseIcon.vue';
 import VideoBackward from '../components/icon/VideoBackward.vue';
 import VideoForward from '../components/icon/VideoForward.vue';
+import { useGetRequest } from '../composables/useRequest';
+import turnSecondsToHour from '../composables/useSecondsToHour';
 
 // Select the HTML5 video
 const video = useTemplateRef('video')
 const videoStopped = ref(true)
 const videoFull = ref(false)
 const pageLoaded = ref(false)
-onMounted(()=>{
-// update the progress bar
+const route = useRoute()
+const currentEpisode = ref()
+const episodes = ref()
+const seasons = ref()
+const seasonValue = ref()
+onMounted(async ()=>{
+    const { Data, Error} = await useGetRequest('episodes/'+route.params.id)
+    currentEpisode.value = Data.value.data
+    const { Data:seasonss} = await useGetRequest('seasons/?program='+currentEpisode.value.program.id)
+    seasons.value = seasonss.value.data
+    const { Data:eps} = await useGetRequest('episodes/?season='+seasons.value[0].id)
+    episodes.value = eps.value.data.result
+    seasonValue.value = seasons.value[0].id
+    pageLoaded.value = true
+})
+// add vidoe setting after browser load vid
+watch(video, ()=> {
+    // update the progress bar
 video.value.addEventListener("timeupdate", () => {
     let curr = (video.value.currentTime / video.value.duration) * 100
     if(video.value.ended){
@@ -151,8 +143,24 @@ video.value.addEventListener("timeupdate", () => {
     }
     document.querySelector('.inner').style.width = `${curr}%`
 })
-pageLoaded.value = true
 })
+
+// react to params changes
+watch(
+  () => route.params.id,
+  async (newId, oldId) => {
+    pageLoaded.value = false
+
+    const { Data, Error} = await useGetRequest('episodes/'+newId)
+    currentEpisode.value = Data.value.data
+    const { Data:seasonss} = await useGetRequest('seasons/?program='+currentEpisode.value.program.id)
+    seasons.value = seasonss.value.data
+    const { Data:eps} = await useGetRequest('episodes/?season='+seasons.value[0].id)
+    episodes.value = eps.value.data.result
+    seasonValue.value = seasons.value[0].id
+    pageLoaded.value = true
+  }
+)
 // pause or play the video
 const play = (e) => {
     // Condition when to play a video
@@ -244,5 +252,31 @@ const forward = (e) => {
 }
 .fa {
     font-size: 20px !important;
+}
+.select-container {
+    position: relative;
+    width: 300px;
+}
+.select-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: black;
+    cursor: pointer;
+}
+.select-container::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: white;
 }
 </style>

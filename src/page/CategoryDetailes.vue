@@ -1,7 +1,7 @@
 <template>
     <div class="dark:bg-black overflow-hidden w-full">
-      <section class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
-            <h1 class="text-5xl sm:text-3xl text-site-primary font-bold mt-12 text-center">الفقه والفتاوى</h1>
+      <section v-if="category" class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
+            <h1 class="text-5xl sm:text-3xl text-site-primary font-bold mt-12 text-center">{{ category.name }}</h1>
             <h1 class="text-5xl sm:text-3xl dark:text-white font-bold mt-20 translate-y-[15px]"> الحلقات الأكثر <span class=" text-site-primary">مشاهدة</span></h1>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
                 <div v-for="index in 4" class=" bg-site-dark-primary w-[23%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
@@ -41,43 +41,42 @@
             </div>
             <div class="w-full border-b text-white p-2 mt-20 flex items-center gap-3">
                 <button class="text-site-primary font-semibold">البرامج</button>
-                <button>الحلقات</button>
+                <!-- <button>الحلقات</button> -->
             </div>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
-                <div v-for="index in 10" class=" bg-site-dark-primary w-[23%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img src="/img/Course-Images.png" class="w-full" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                <RouterLink v-for="(program,index) in programes" :key="index" :to="'/stream/'+program.id" class=" bg-site-dark-primary w-[30%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
+                        <img :src="program.image" class="w-full" alt="Course-Images">
+                        <!-- <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
                             <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
+                        </div> -->
 
                         <div class="flex px-4 justify-between items-center my-2">
                             <h1 class=" text-2xl font-semibold gradiant-text"
                             style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
                             >
-                                عنوان الحلقة
+                                {{ program.name }}
                             </h1>
                             <button>
                                 <DotsIcon />
                             </button>
                         </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
+                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
+                          <div v-for="(tag,indexx) in program.name_index" :key="indexx" class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
+                              {{ tag.name }}
+                          </div>
                         </div>
+                        <p class="px-4 text-white mb-3">{{ program.description }}</p>
                         <hr>
                         <div class="flex px-4 items-center justify-between my-4">
                             <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">أحمد بن سميط</p>
+                                <img :src="program.instructor.image" alt="profile-img" class=" w-12">
+                                <p class="text-white">{{ program.instructor.name }}</p>
                             </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
+                            <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
+                            متوفر {{ program.season_count }} مواسم
                         </div>
-                </div>
+                        </div>
+                </RouterLink>
             </div>
         </section>  
         <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
@@ -149,7 +148,21 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { useGetRequest } from '../composables/useRequest';
+import { RouterLink,useRoute } from 'vue-router';
 
+const route = useRoute()
+const category = ref()
+const programes = ref()
+onMounted(async ()=>{
+  const { Data} = await useGetRequest('categories/'+route.params.id)
+  category.value = Data.value.data
+  const { Data:programess} = await useGetRequest('programes/?index='+route.params.id)
+  programes.value = programess.value.data.result
+/*   const { Data:programess} = await useGetRequest('programes/?episodes='+route.params.id)
+  programes.value = programess.value.data.result */
+})
 </script>
 
 <style>
