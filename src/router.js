@@ -75,6 +75,11 @@ const router = createRouter({
       name: 'stream-index',
       component: () => import('./page/StreamIndex.vue'),
     },
+    {
+      path: '/programs',
+      name: 'programs',
+      component: () => import('./page/Programsindex.vue'),
+    },
   ],
 });
 /* router.beforeEach((to, from, next) => {
