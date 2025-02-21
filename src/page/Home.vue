@@ -113,317 +113,41 @@
             <h1 class="text-5xl text-site-secondary font-bold mt-40 translate-y-[15px]">متابعة <span class=" text-site-primary">المشاهدة</span></h1>
             <swiper-container class="mySwiper2" pagination="true" init="false">
                 <swiper-slide v-for="(slide,index) in episodsContinue" :key="index" class="flex gap-2 pt-16">
-                    <div v-for="(ep,indexx) in slide" :key="indexx" class="bg-white w-1/4 min-h-[360px] border border[#E9EAF0] rounded-[20px]">
-                        <img :src="ep.image" alt="Course-Images" class="w-full h-2/5">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                {{ ep.name }}
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >{{ ep.name }}</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                {{ ep.season }}
+                    <RouterLink v-for="(ep,indexx) in slide" :key="ep.episode" :to="'/stream-video/'+ep.episode" class="bg-white w-1/4 min-h-[360px] border border[#E9EAF0] rounded-[20px]">
+                            <img :src="ep.image" alt="Course-Images" class="w-full h-2/5">
+                            <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                                <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">{{ ep.instructor.name }}</p>
+                            <div class="flex px-4 justify-between items-center my-2">
+                                <h1 class=" text-2xl font-semibold gradiant-text"
+                                style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
+                                >
+                                    {{ ep.name }}
+                                </h1>
+                                <button>
+                                    <DotsIcon />
+                                </button>
                             </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>{{ ep.stop_time }}s</span> 
-                                <ClockIcon />  
+                            <div class="flex px-4 justify-between items-center mb-4">
+                                <p class=" text-site-secondary font-bold" >{{ ep.name }}</p>
+                                <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
+                                    {{ ep.season }}
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <hr>
+                            <div class="flex px-4 items-center justify-between my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="/img/profile-img-course.png" alt="profile-img">
+                                    <p class="text-[#999999]">{{ ep.instructor.name }}</p>
+                                </div>
+                                <div class="text-site-primary text-s flex items-center gap-1">
+                                    <span>{{ turnSecondsToHour(ep.time) }}</span> 
+                                    <ClockIcon />  
+                                </div>
+                            
+                            </div>
+                    </RouterLink>
                 </swiper-slide>
-<!--                 <swiper-slide class="flex gap-2 pt-16">
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                </swiper-slide>
-                <swiper-slide class="flex gap-2 pt-16">
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #131413 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-site-secondary font-bold" >الحلقة ال ١٩</p>
-                            <div class=" bg-[#F8F3EA] text-site-primary text-xs rounded-3xl px-3 py-2">
-                                الموسم الأول
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-[#999999]">أحمد بن سميط</p>
-                            </div>
-                            <div class="text-site-primary text-s flex items-center gap-1">
-                                <span>1h 47m</span> 
-                                <ClockIcon />  
-                            </div>
-                        </div>
-                    </div>
-                </swiper-slide> -->
             </swiper-container>
         </section>
         <section class="cards-section-2 my-10 px-28">
@@ -462,7 +186,7 @@
             <h1 class="text-5xl text-site-secondary font-bold mt-10 translate-y-[15px]">برامج موصي <span class=" text-site-primary">به</span></h1>
             <swiper-container class="mySwiper3" pagination="true" init="false">
                 <swiper-slide v-for="(slide,index) in episods" :key="index" class="flex gap-2 pt-16">
-                    <div v-for="(ep,indexx) in slide" :key="indexx" class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
+                    <RouterLink v-for="(ep,indexx) in slide" :key="indexx" :to="'/stream/'+ep.id" class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
                         <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="Course-Images" class="w-full h-2/5">
                         <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
                             <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
@@ -483,111 +207,8 @@
                             متوفر {{ ep.program.season_count }} مواسم
                         </div>
                     </div>
-                    </div>  
+                    </RouterLink>  
                 </swiper-slide>
-<!--                 <swiper-slide class="flex gap-2 pt-16">
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
-                    </div>
-                    <div class="bg-white w-1/4 min-h-[312px] border border[#E9EAF0] rounded-[20px]">
-                        <img src="/img/Course-Images.png" alt="Course-Images">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-                        <div class="flex px-4 gap-1 items-center my-3 justify-end">
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Tafsir
-                        </div>
-                        <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
-                            Quranic
-                        </div>
-                    </div>
-                    <p class="px-4 text-site-secondary mb-3">شامل يضم كل ما يحتاجه المسلم من مواقيت الصلاة ومواعيد الاذان</p>
-                    <hr>
-                    <div class="flex px-4 items-center justify-between my-4">
-                        <div class="flex gap-2 items-center">
-                            <img src="/img/profile-img-course.png" alt="profile-img">
-                            <p class="text-[#999999]">أحمد بن سميط</p>
-                        </div>
-                        <div class=" bg-[#EBE9E5] text-site-primary text-xs rounded-3xl px-2 py-1 min-w-max">
-                            متوفر ٤ مواسم
-                        </div>
-                    </div>
-                    </div>
-                </swiper-slide> -->
-
             </swiper-container>
         </section>
         <section class="cards-section-3 my-10 px-28">
@@ -771,6 +392,8 @@ import VideoPlayIcon from '../components/icon/VideoPlayIcon.vue';
 import ArrowIcon from '../components/icon/ArrowIcon.vue';
 import DotsIcon from '../components/icon/3DotsIcon.vue';
 import ClockIcon from '../components/icon/ClockIcon.vue';
+import { RouterLink } from 'vue-router';
+import turnSecondsToHour from '../composables/useSecondsToHour';
 
 const homeData = ref()
 const episods = ref([])

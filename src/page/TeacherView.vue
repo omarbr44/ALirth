@@ -1,6 +1,6 @@
 <template>
-  <div class="dark:bg-black overflow-hidden w-full" v-if="programs">
-    <section class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
+  <div class="dark:bg-black overflow-hidden w-full">
+    <section v-if="!pageLoad" class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
       <div class="w-full flex sm:flex-col justify-center items-center gap-7">
         <div class="w-1/2 sm:w-full">
           <img :src="teacher.image" alt="img">
@@ -60,7 +60,10 @@
                         </div>
                 </RouterLink>
             </div>
-    </section>  
+    </section>
+    <div v-else class=" h-screen flex justify-center items-center">
+        <LoaderIcon />
+    </div>     
     <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
       <div class="">
         <!-- Footer Content -->
@@ -134,14 +137,19 @@ import ClockIcon from '../components/icon/ClockIcon.vue'
 import { onMounted, ref, watch } from 'vue';
 import { useGetRequest } from '../composables/useRequest';
 import { RouterLink,useRoute } from 'vue-router';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
 
 const route = useRoute()
 const teacher = ref()
 const programs = ref()
+const pageLoad = ref(true)
+
 onMounted(async ()=>{
   const { Data} = await useGetRequest('instructors/'+route.params.id)
   teacher.value = Data.value.data
   const { Data:programss } = await useGetRequest('programes/?instructor='+route.params.id)
   programs.value = programss.value.data.result
+  pageLoad.value = false
+
 })
 </script>

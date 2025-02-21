@@ -1,6 +1,6 @@
 <template>
   <div class="dark:bg-black overflow-hidden w-full">
-    <section class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
+    <section v-if="!pageLoad" class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
         <h1 class="text-5xl sm:text-3xl font-bold mt-20 mb-16 text-site-primary">المحاضرين</h1>
         <div class="flex flex-wrap justify-center items-center gap-4 p-4">
     <!-- Card 1 -->
@@ -17,7 +17,10 @@
       </div>
     </RouterLink>
   </div>
-    </section>  
+    </section>
+    <div v-else class=" h-screen flex justify-center items-center">
+        <LoaderIcon />
+    </div>   
     <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
       <div class="">
         <!-- Footer Content -->
@@ -89,10 +92,15 @@
 import { onMounted, ref } from 'vue';
 import { useGetRequest } from '../composables/useRequest';
 import { RouterLink } from 'vue-router';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
 
 const teachers = ref()
+const pageLoad = ref(true)
+
 onMounted(async ()=>{
   const { Data, Error} = await useGetRequest('instructors/')
   teachers.value = Data.value.data.result
+  pageLoad.value = false
+
 })
 </script>

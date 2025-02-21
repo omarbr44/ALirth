@@ -1,97 +1,102 @@
 <template>
-    <div v-if="episodes" class="bg-black overflow-hidden">
-        <section class="hero-section bg-center h-screen w-full flex flex-col justify-end" :style="{ backgroundImage: `url(${episodes[0].image})` }">
-            <div class="w-2/4 px-16" >
-                <div class="flex gap-6 items-center">
-                    <p class="text-white text-sm">{{ turnSecondsToHour(episodes[0].time) }}</p>
-                    <p class="text-white text-sm">Season 1 | {{ episodes[0].name }}</p>
-                    <p class="text-white text-sm">{{ episodes[0].create_at.slice(0,4) }}</p>
+    <div class="bg-black overflow-hidden">
+        <template v-if="!pageLoad">
+            <section class="hero-section bg-center h-screen w-full flex flex-col justify-end" :style="{ backgroundImage: `url(${episodes[0].image})` }">
+                <div class="w-2/4 px-16" >
+                    <div class="flex gap-6 items-center">
+                        <p class="text-white text-sm">{{ turnSecondsToHour(episodes[0].time) }}</p>
+                        <p class="text-white text-sm">Season 1 | {{ episodes[0].name }}</p>
+                        <p class="text-white text-sm">{{ episodes[0].create_at.slice(0,4) }}</p>
+                    </div>
+                    <p class="text-white text-sm my-5">
+                        {{ episodes[0].description }}
+                    </p>
+                    <div class="w-full flex flex-col bg-[#131209] rounded-full -translate-y-1">
+                        <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                    </div>
+                    <div class="w-full flex justify-between items-center">
+                        <p class="text-white text-sm">60%</p>
+                        <p class="text-white text-sm">{{ turnSecondsToHour(episodes[0].time) }}</p>
+                    </div>
                 </div>
-                <p class="text-white text-sm my-5">
-                    {{ episodes[0].description }}
-                </p>
-                <div class="w-full flex flex-col bg-[#131209] rounded-full -translate-y-1">
-                    <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
+                <div class="flex items-center px-16 py-4  justify-between mt-4 bg-black bg-opacity-80">
+                    <div class="flex items-center gap-4">
+                    <RouterLink 
+                      :to="'/stream-video/'+episodes[0].id"
+                      class=" bg-site-primary text-white py-3 px-4 rounded-3xl"
+                      >
+                      استكمال المشاهدة
+                    </RouterLink>
+                    <button class=" flex justify-center items-center p-2 border rounded-full border-white">
+                        <HeartIcon />
+                    </button>
+                    </div>
+                    <button class="flex items-center gap-4 text-white">
+                        <span class="text-lg">share</span>
+                        <ShareIcon />
+                    </button>
                 </div>
-                <div class="w-full flex justify-between items-center">
-                    <p class="text-white text-sm">60%</p>
-                    <p class="text-white text-sm">{{ turnSecondsToHour(episodes[0].time) }}</p>
+            </section>
+            <section class="cards-section my-10 px-16">
+                <div class="flex items-center gap-4 text-[#BFBCB0]">
+                    <p class=" text-site-primary border-b border-site-primary pb-1">الحلقات</p>
+                    <p class=" pb-1">المزيد من المعلومات</p>
+                    <p class=" pb-1">ذات صلة</p>
+                    <p class=" pb-1">عن الشيخ محمد</p>
                 </div>
-            </div>
-            <div class="flex items-center px-16 py-4  justify-between mt-4 bg-black bg-opacity-80">
-                <div class="flex items-center gap-4">
-                <RouterLink 
-                  :to="'/stream-video/'+episodes[0].id"
-                  class=" bg-site-primary text-white py-3 px-4 rounded-3xl"
-                  >
-                  استكمال المشاهدة
-                </RouterLink>
-                <button class=" flex justify-center items-center p-2 border rounded-full border-white">
-                    <HeartIcon />
-                </button>
+                <div class="w-full h-[1px] bg-[#807D6B]"></div>
+                <!-- <div class="w-52 flex items-center justify-between border border-[#807D6B] rounded-3xl p-2 px-4 text-[#BFBCB0] my-6">
+                    <span>الموسم الأول</span>
+                    <span>V</span>
+                </div> -->
+                <div class="select-container my-10">
+                    <select v-model="seasonValue">
+                        <option value="" selected>اختر الخطة</option>
+                        <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
+                    </select>
                 </div>
-                <button class="flex items-center gap-4 text-white">
-                    <span class="text-lg">share</span>
-                    <ShareIcon />
-                </button>
-            </div>
-        </section>
-        <section class="cards-section my-10 px-16">
-            <div class="flex items-center gap-4 text-[#BFBCB0]">
-                <p class=" text-site-primary border-b border-site-primary pb-1">الحلقات</p>
-                <p class=" pb-1">المزيد من المعلومات</p>
-                <p class=" pb-1">ذات صلة</p>
-                <p class=" pb-1">عن الشيخ محمد</p>
-            </div>
-            <div class="w-full h-[1px] bg-[#807D6B]"></div>
-            <!-- <div class="w-52 flex items-center justify-between border border-[#807D6B] rounded-3xl p-2 px-4 text-[#BFBCB0] my-6">
-                <span>الموسم الأول</span>
-                <span>V</span>
-            </div> -->
-            <div class="select-container my-10">
-                <select v-model="seasonValue">
-                    <option value="" selected>اختر الخطة</option>
-                    <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
-                </select>
-            </div>
-            <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
-                <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class=" bg-site-dark-primary w-[30%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="Course-Images" class="w-full h-2/5">
-                        <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
-                            <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
-                        </div>
-
-                        <div class="flex px-4 justify-between items-center my-2">
-                            <h1 class=" text-2xl font-semibold gradiant-text"
-                            style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
-                            >
-                                عنوان الحلقة
-                            </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
-                        </div>
-                        <div class="flex px-4 justify-between items-center mb-4">
-                            <p class=" text-white font-bold" >{{ ep.name }}</p>
-                            <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
-                                {{ ep.season }}
+                <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
+                    <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class=" bg-site-dark-primary w-[30%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
+                            <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="Course-Images" class="w-full h-2/5">
+                            <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
+                                <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="flex px-4 items-center justify-between my-4">
-                            <div class="flex gap-2 items-center">
-                                <img src="/img/profile-img-course.png" alt="profile-img">
-                                <p class="text-white">{{ ep.instructor.name }}</p>
+    
+                            <div class="flex px-4 justify-between items-center my-2">
+                                <h1 class=" text-2xl font-semibold gradiant-text"
+                                style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
+                                >
+                                    عنوان الحلقة
+                                </h1>
+                                <button>
+                                    <DotsIcon />
+                                </button>
                             </div>
-                            <div class="text-white text-s flex items-center gap-1">
-                                <span>{{ turnSecondsToHour(ep.time) }}</span> 
-                                <!-- <span>1h 47m</span> --> 
-                                <ClockIcon />  
+                            <div class="flex px-4 justify-between items-center mb-4">
+                                <p class=" text-white font-bold" >{{ ep.name }}</p>
+                                <div class=" bg-white text-site-primary text-xs rounded-3xl px-3 py-2">
+                                    {{ ep.season }}
+                                </div>
                             </div>
-                        </div>
-                </RouterLink>
-            </div>
-        </section>
+                            <hr>
+                            <div class="flex px-4 items-center justify-between my-4">
+                                <div class="flex gap-2 items-center">
+                                    <img src="/img/profile-img-course.png" alt="profile-img">
+                                    <p class="text-white">{{ ep.instructor.name }}</p>
+                                </div>
+                                <div class="text-white text-s flex items-center gap-1">
+                                    <span>{{ turnSecondsToHour(ep.time) }}</span> 
+                                    <!-- <span>1h 47m</span> --> 
+                                    <ClockIcon />  
+                                </div>
+                            </div>
+                    </RouterLink>
+                </div>
+            </section>
+        </template>
+        <div v-else class=" h-screen flex justify-center items-center">
+            <LoaderIcon />
+        </div>
         <footer class=" bg-site-dark-primary w-full rounded-s-3xl rounded-e-3xl pt-10">
             <div class="flex justify-evenly w-full">
                 <div class="">
@@ -154,12 +159,15 @@ import { onMounted, ref, watch } from 'vue';
 import { useGetRequest } from '../composables/useRequest';
 import { RouterLink,useRoute } from 'vue-router';
 import turnSecondsToHour from '../composables/useSecondsToHour';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
 
 const route = useRoute()
 const program = ref()
 const episodes = ref()
 const seasons = ref()
 const seasonValue = ref()
+const pageLoad = ref(true)
+
 onMounted(async ()=>{
   const { Data} = await useGetRequest('programes/'+route.params.id)
   program.value = Data.value.data
@@ -168,6 +176,8 @@ onMounted(async ()=>{
   const { Data:eps} = await useGetRequest('episodes/?season='+seasons.value[0].id)
   episodes.value = eps.value.data.result
   seasonValue.value = seasons.value[0].id
+  pageLoad.value = false
+
 })
 
 watch(seasonValue, async ()=>{

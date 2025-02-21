@@ -1,54 +1,58 @@
 <template>
-    <div v-if="episodes" class="flex h-fit w-full bg-site-dark-primary">
-        <div class="w-[70%]"
-             :class="videoFull ? 'w-full' : ''">
-            <div class="flex justify-between items-center pt-10 px-10">
-                <div class="flex gap-4 items-center text-white">
-                    <button @click="videoFull = !videoFull" class="bg-[#262011] p-3">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.3867 1.15556L20.3978 3.32222L17.2376 6.5C16.663 7.07778 16.663 7.94444 17.2376 8.52222C17.8122 9.1 18.674 9.1 19.2486 8.52222L22.4088 5.34444L24.5635 7.36667C25.1381 7.94444 25.8564 7.51111 25.8564 6.93333V0.722222C25.8564 0.288889 25.5691 0 25.1381 0H18.9613C18.3867 0 17.9558 0.722222 18.3867 1.15556ZM1.14917 7.36667L3.16022 5.34444L6.32044 8.52222C6.89503 9.1 7.75691 9.1 8.33149 8.52222C8.90608 7.94444 8.90608 7.07778 8.33149 6.5L5.31492 3.32222L7.32597 1.15556C7.90055 0.722222 7.46961 0 6.89503 0H0.718232C0.287293 0 0 0.288889 0 0.722222V6.93333C0 7.51111 0.718232 7.94444 1.14917 7.36667ZM7.32597 24.7L5.17127 22.6778L8.33149 19.5C8.90608 18.9222 8.90608 18.0556 8.33149 17.4778C7.75691 16.9 6.89503 16.9 6.32044 17.4778L3.16022 20.6556L1.00552 18.6333C0.718232 18.0556 0 18.4889 0 19.0667V25.2778C0 25.7111 0.287293 26 0.718232 26H6.89503C7.46961 26 7.90055 25.2778 7.32597 24.7ZM24.7072 18.4889L22.5525 20.5111L19.3923 17.3333C18.8177 16.7556 17.9558 16.7556 17.3812 17.3333C16.8066 17.9111 16.8066 18.7778 17.3812 19.3556L20.5414 22.5333L18.5304 24.7C18.0994 25.1333 18.3867 26 19.105 26H25.2818C25.7127 26 26 25.7111 26 25.2778V19.0667C25.8564 18.4889 25.1381 18.0556 24.7072 18.4889Z" fill="white"/>
-                        </svg>
-                    </button>
-                    <button class="bg-[#262011] p-3">
-                        <ShareIcon />
-                    </button>
+    <div class="flex h-fit w-full bg-site-dark-primary">
+        <template v-if="pageLoaded">
+            <div class="w-[70%]"
+                 :class="videoFull ? 'w-full' : ''">
+                <div class="flex justify-between items-center pt-10 px-10">
+                    <div class="flex gap-4 items-center text-white">
+                        <button @click="videoFull = !videoFull" class="bg-[#262011] p-3">
+                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.3867 1.15556L20.3978 3.32222L17.2376 6.5C16.663 7.07778 16.663 7.94444 17.2376 8.52222C17.8122 9.1 18.674 9.1 19.2486 8.52222L22.4088 5.34444L24.5635 7.36667C25.1381 7.94444 25.8564 7.51111 25.8564 6.93333V0.722222C25.8564 0.288889 25.5691 0 25.1381 0H18.9613C18.3867 0 17.9558 0.722222 18.3867 1.15556ZM1.14917 7.36667L3.16022 5.34444L6.32044 8.52222C6.89503 9.1 7.75691 9.1 8.33149 8.52222C8.90608 7.94444 8.90608 7.07778 8.33149 6.5L5.31492 3.32222L7.32597 1.15556C7.90055 0.722222 7.46961 0 6.89503 0H0.718232C0.287293 0 0 0.288889 0 0.722222V6.93333C0 7.51111 0.718232 7.94444 1.14917 7.36667ZM7.32597 24.7L5.17127 22.6778L8.33149 19.5C8.90608 18.9222 8.90608 18.0556 8.33149 17.4778C7.75691 16.9 6.89503 16.9 6.32044 17.4778L3.16022 20.6556L1.00552 18.6333C0.718232 18.0556 0 18.4889 0 19.0667V25.2778C0 25.7111 0.287293 26 0.718232 26H6.89503C7.46961 26 7.90055 25.2778 7.32597 24.7ZM24.7072 18.4889L22.5525 20.5111L19.3923 17.3333C18.8177 16.7556 17.9558 16.7556 17.3812 17.3333C16.8066 17.9111 16.8066 18.7778 17.3812 19.3556L20.5414 22.5333L18.5304 24.7C18.0994 25.1333 18.3867 26 19.105 26H25.2818C25.7127 26 26 25.7111 26 25.2778V19.0667C25.8564 18.4889 25.1381 18.0556 24.7072 18.4889Z" fill="white"/>
+                            </svg>
+                        </button>
+                        <button class="bg-[#262011] p-3">
+                            <ShareIcon />
+                        </button>
+                    </div>
+                    <RouterLink
+                    class="flex items-center gap-3 text-white"
+                    to="">
+                    <span>back</span>
+                    <span>></span>
+                    </RouterLink>
                 </div>
-                <RouterLink
-                class="flex items-center gap-3 text-white"
-                to="">
-                <span>back</span>
-                <span>></span>
-                </RouterLink>
-            </div>
-            <div class=" w-full pb-8 pt-24 px-4">
-                    <video ref="video" onclick="play(event)" :src="currentEpisode.video_file" id="video" class="w-full h-full"></video>
-            </div>
-            <div class="">
-                        <div class="timeline px-2">
-                            <div class="bar">
-                                <div class="inner"></div>
+                <div class=" w-full pb-8 pt-24 px-4">
+                        <video ref="video" onclick="play(event)" :src="currentEpisode.video_file" id="video" class="w-full h-full"></video>
+                </div>
+                <div class="">
+                            <div class="timeline px-2">
+                                <div class="bar">
+                                    <div class="inner"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-        </div>
-        <div class=" px-6 flex flex-col gap-6 overflow-auto mt-24 mb-16 h-[35rem]"
-             :class="videoFull ? 'hidden' : ''">
-             <div class="select-container my-10">
-                <select v-model="seasonValue">
-                    <option value="" selected>اختر الخطة</option>
-                    <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
-                </select>
-            </div>
-            <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class="flex items-center gap-4">
-                <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="img" class="w-32 h-18 rounded-lg">
-                <div>
-                    <p class="text-white font-semibold mb-4">{{ ep.name }}</p>
-                    <p class=" text-[#BFBCB0] text-sm">{{ turnSecondsToHour(ep.time) }}</p>
-                </div>
-            </RouterLink>
-        </div>
     
+            </div>
+            <div class=" px-6 flex flex-col gap-6 overflow-auto mt-24 mb-16 h-[35rem]"
+                 :class="videoFull ? 'hidden' : ''">
+                 <div class="select-container my-10">
+                    <select v-model="seasonValue">
+                        <option value="" selected>اختر الخطة</option>
+                        <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
+                    </select>
+                </div>
+                <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class="flex items-center gap-4">
+                    <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="img" class="w-32 h-18 rounded-lg">
+                    <div>
+                        <p class="text-white font-semibold mb-4">{{ ep.name }}</p>
+                        <p class=" text-[#BFBCB0] text-sm">{{ turnSecondsToHour(ep.time) }}</p>
+                    </div>
+                </RouterLink>
+            </div>       
+        </template>
+        <div v-else class=" h-screen w-full flex justify-center items-center">
+            <LoaderIcon />
+        </div>
     </div>
     <div class="pb-5 pl-16 pr-10 flex items-center justify-between bg-site-dark-primary" v-if="pageLoaded">
         <div class="flex gap-8 items-center">
@@ -109,8 +113,9 @@ import VideoPlayIcon from '../components/icon/VideoPlayIcon.vue';
 import VideoPauseIcon from '../components/icon/VideoPauseIcon.vue';
 import VideoBackward from '../components/icon/VideoBackward.vue';
 import VideoForward from '../components/icon/VideoForward.vue';
-import { useGetRequest } from '../composables/useRequest';
+import { useGetRequest, usePostRequest } from '../composables/useRequest';
 import turnSecondsToHour from '../composables/useSecondsToHour';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
 
 // Select the HTML5 video
 const video = useTemplateRef('video')
@@ -122,6 +127,7 @@ const currentEpisode = ref()
 const episodes = ref()
 const seasons = ref()
 const seasonValue = ref()
+
 onMounted(async ()=>{
     const { Data, Error} = await useGetRequest('episodes/'+route.params.id)
     currentEpisode.value = Data.value.data
@@ -143,6 +149,7 @@ video.value.addEventListener("timeupdate", () => {
     }
     document.querySelector('.inner').style.width = `${curr}%`
 })
+    video.value.currentTime = currentEpisode.value.stop_time ? currentEpisode.value.stop_time : 0
 })
 
 // react to params changes
@@ -161,8 +168,15 @@ watch(
     pageLoaded.value = true
   }
 )
+
+const stoppingTimeObj = ref({
+    episode: route.params.id,
+    stopping_place_status: 1,
+    stop_time: 0,
+})
 // pause or play the video
 const play = (e) => {
+    console.log(video.value.currentTime)
     // Condition when to play a video
     if(video.value.paused){
         video.value.play()
@@ -171,7 +185,13 @@ const play = (e) => {
     else{
         video.value.pause()
         videoStopped.value = true
+        sendStopTime()
     }
+}
+const sendStopTime = async () => {
+    stoppingTimeObj.value.stop_time = Math.floor(video.value.currentTime)
+    stoppingTimeObj.value.stopping_place_status = stoppingTimeObj.value.stop_time == currentEpisode.value.time ? 2 : 1
+    const { Data, Error} = await usePostRequest('accounts/stopping_place/',stoppingTimeObj.value) 
 }
 // trigger fullscreen
 /* const fullScreen = (e) => {

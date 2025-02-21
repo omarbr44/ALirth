@@ -1,16 +1,22 @@
 <template>
-    <div class="bg-black overflow-hidden w-full">
-        <section class="w-full px-32 md:px-20 sm:px-8 flex flex-wrap gap-4 mt-64 mb-20">
-            <RouterLink
-              :to="'/category-detailes/'+category.id"
-              v-for="(category,index) in categories"
-              :key="index"
-              class="bg-[#262626] text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between" 
-            >
-            <span>< &nbsp; {{ category.programs_count }}</span>
-            <span>{{ category.name }}</span>
-            </RouterLink>
-        </section>
+<div class="bg-white dark:bg-black overflow-hidden w-full">
+    <section
+      v-if="!pageLoad"
+      class="w-full px-32 md:px-20 sm:px-8 flex flex-wrap gap-4 mt-64 mb-20"
+    >
+      <RouterLink
+        :to="'/category-detailes/' + category.id"
+        v-for="(category, index) in categories"
+        :key="index"
+        class="bg-gray-100 dark:bg-[#262626] text-gray-800 dark:text-white rounded-md lg:w-[23%] md:w-[30%] sm:w-full p-3 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-[#333333] transition-colors"
+      >
+        <span>< &nbsp; {{ category.programs_count }}</span>
+        <span>{{ category.name }}</span>
+      </RouterLink>
+    </section>
+        <div v-else class=" h-screen flex justify-center items-center">
+            <LoaderIcon />
+        </div>
         <footer class=" bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
             <div class="flex justify-evenly w-full">
                 <div class="">
@@ -68,11 +74,14 @@
 import { onMounted, ref } from 'vue';
 import { useGetRequest } from '../composables/useRequest';
 import { RouterLink } from 'vue-router';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
 
 const categories = ref()
+const pageLoad = ref(true)
 onMounted(async ()=>{
   const { Data, Error} = await useGetRequest('categories/')
   categories.value = Data.value.data.result
+  pageLoad.value = false
 })
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="dark:bg-black overflow-hidden w-full">
-      <section v-if="programes" class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
+      <section v-if="!pageLoad" class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
             <h1 class="text-5xl sm:text-3xl dark:text-white font-bold mt-12 text-center">كل <span class="text-site-primary">البرامج</span> الدينية التي تفضلها</h1>
             <h1 class="text-5xl sm:text-3xl dark:text-white font-bold mt-20 translate-y-[15px]"> الحلقات الأكثر <span class=" text-site-primary">مشاهدة</span></h1>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
@@ -43,7 +43,7 @@
                 <button @click="changeCategory('')" class=" rounded-3xl px-3 py-1" :class="selectedCategory == '' ? 'bg-site-primary' : 'bg-site-secondary'">الكل</button>
                 <button v-for="(cat,index) in categories" :key="index" @click="changeCategory(cat.id)" class=" rounded-3xl px-3 py-1" :class="selectedCategory == cat.id ? 'bg-site-primary' : 'bg-site-secondary'">{{ cat.name }}</button>
             </div>
-            <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
+            <div v-if="!categoryLoad" class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
                 <RouterLink v-for="(program,index) in programes" :key="index" :to="'/stream/'+program.id" class=" bg-site-dark-primary w-[30%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
                         <div class="flex px-4 justify-between items-center my-2">
                             <h1 class=" text-2xl font-semibold gradiant-text"
@@ -73,7 +73,13 @@
                         </div>
                 </RouterLink>
             </div>
-        </section>  
+            <div v-else class=" h-screen flex justify-center items-center">
+                <LoaderIcon />
+            </div>  
+      </section>
+      <div v-else class=" h-screen flex justify-center items-center">
+          <LoaderIcon />
+      </div>  
         <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
     <div class="">
       <!-- Footer Content -->
@@ -146,17 +152,23 @@
 import { onMounted, ref } from 'vue';
 import { useGetRequest } from '../composables/useRequest';
 import { RouterLink } from 'vue-router';
+import LoaderIcon from '../components/icon/loaderIcon.vue';
 
 const categories = ref()
 const selectedCategory = ref('')
 const programes = ref()
+const pageLoad = ref(true)
+const categoryLoad = ref(false)
+
 onMounted(async ()=>{
   const { Data} = await useGetRequest('categories/')
   categories.value = Data.value.data.result
   const { Data:programess} = await useGetRequest('programes/')
   programes.value = programess.value.data.result
+  pageLoad.value = false
 })
 const changeCategory = async id => {
+  categoryLoad.value = true
   selectedCategory.value = id
   if(id == '') {
     const { Data:programess} = await useGetRequest('programes/') 
@@ -166,6 +178,7 @@ const changeCategory = async id => {
     const { Data:programess} = await useGetRequest('programes/?index='+id)
     programes.value = programess.value.data.result
   }
+  categoryLoad.value = false
 }
 </script>
 
