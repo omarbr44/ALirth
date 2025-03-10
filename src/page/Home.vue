@@ -8,14 +8,14 @@
                             <p class=" text-site-primary" >{{ data.program.description }}</p>
                             <h1 class=" text-white font-bold text-6xl my-4" >{{ data.program.name }}</h1>
                             <div class="flex items-center gap-10 mt-10">
-                                <button class=" flex items-center justify-center gap-2 bg-site-primary rounded-full px-12 py-4">
+                                <RouterLink :to="'/stream/'+data.program.id" class=" flex items-center justify-center gap-2 bg-site-primary rounded-full px-12 py-4">
                                     <VideoPlayIcon />
                                     <span class="text-white font-semibold">شاهد الان</span>
-                                </button>
-                                <button class=" flex items-center justify-center gap-5">
+                                </RouterLink>
+<!--                                 <button class=" flex items-center justify-center gap-5">
                                     <span class="text-white font-semibold text-lg">Get Started</span>
                                     <ArrowIcon />
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </div>
@@ -233,10 +233,10 @@
     <h1 class="text-5xl text-site-secondary font-bold mt-16 translate-y-[15px]">{{ section.name }}</h1>
     <swiper-container :class="'mySwiper4' + index" pagination="true" init="false">
       <swiper-slide v-for="(slide, slideIndex) in episods[index]" :key="slideIndex" class="flex gap-2 pt-16">
-        <div v-for="(ep, epIndex) in slide" :key="epIndex" class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center relative">
+        <RouterLink v-for="(ep, epIndex) in slide" :key="epIndex" :to="section.type_label ?'/stream/'+ep.id : '/stream-video/'+ep.id" class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center relative">
           <img :src="ep.image" alt="image" class="w-full h-full absolute">
           <VideoPlayIcon class="relative z-10"/>
-        </div>
+        </RouterLink>
       </swiper-slide>
     </swiper-container>
   </section>
