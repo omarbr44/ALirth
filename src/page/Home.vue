@@ -3,7 +3,7 @@
         <section class="hero-swiper">
             <swiper-container class="mySwiper" init="false">
                 <swiper-slide v-for="(data,index) in homeData?.carousel" :key="index">
-                    <div class=" bg-center h-screen flex flex-col justify-center" :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${data.image_web})` }">
+                    <div class=" bg-center h-screen flex flex-col justify-center bg-no-repeat" :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${data.image_web})` }">
                         <div class=" px-28">
                             <p class=" text-site-primary" >{{ data.program.description }}</p>
                             <h1 class=" text-white font-bold text-6xl my-4" >{{ data.program.name }}</h1>
