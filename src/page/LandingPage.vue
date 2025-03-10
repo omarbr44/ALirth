@@ -362,7 +362,14 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { useGetRequestNoToken } from '../composables/useRequest';
 
+const homeData = ref()
+onMounted(async ()=> {
+    const { Data, Error} = await useGetRequestNoToken('homev2/')
+    homeData.value = Data.value.data
+})
 </script>
 
 <style scoped>

@@ -23,6 +23,20 @@ const url = geturl()
     }
     return {Data,Error}
    }
+   
+   export async function useGetRequestNoToken(api){
+    const userStore = useUserStore()
+    const Data = ref(null)
+    const Error = ref(null)
+    try {
+      const { data } = await axios.get(url+api,{
+      });
+      Data.value = data
+    } catch (error) {
+        Error.value = error.response.data
+    }
+    return {Data,Error}
+   }
 
    export async function usePostRequest(api,body){
     const userStore = useUserStore()

@@ -2,11 +2,11 @@
     <div class="bg-[#F8F8F7] overflow-hidden">
         <section class="hero-swiper">
             <swiper-container class="mySwiper" init="false">
-                <swiper-slide>
-                    <div class=" bg-center h-screen flex flex-col justify-center" style="background-image: url('/img/swiper-hero-img.png');">
+                <swiper-slide v-for="(data,index) in homeData?.carousel" :key="index">
+                    <div class=" bg-center h-screen flex flex-col justify-center" :style="{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${data.image_web})` }">
                         <div class=" px-28">
-                            <p class=" text-site-primary" >وثائقي | 20 الحلقة</p>
-                            <h1 class=" text-white font-bold text-6xl my-4" >رحلتي</h1>
+                            <p class=" text-site-primary" >{{ data.program.description }}</p>
+                            <h1 class=" text-white font-bold text-6xl my-4" >{{ data.program.name }}</h1>
                             <div class="flex items-center gap-10 mt-10">
                                 <button class=" flex items-center justify-center gap-2 bg-site-primary rounded-full px-12 py-4">
                                     <VideoPlayIcon />
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </swiper-slide>
-                <swiper-slide>
+<!--                 <swiper-slide>
                     <div class=" bg-center h-screen flex flex-col justify-center" style="background-image: url('/img/swiper-hero-img2.png');">
                         <div class=" px-28">
                             <p class=" text-white" >بنامج فكري | 2 الحلقة</p>
@@ -55,11 +55,11 @@
                             </div>
                         </div>
                     </div>
-                </swiper-slide>
+                </swiper-slide> -->
                 <div class="custom-pagination">
                     <button class="swiper-pagination-bullet bg-white p-3 w-fit" data-index="0">
-                        <h1 class="">رحلتي</h1>
-                        <p class=" text-site-grey-secondary mb-2">برنامج وثائقي تسجيلي يصاحب فية الضيوف في ملتقي دعوي</p>
+                        <h1 class="">{{ homeData?.carousel[0].program?.name }}</h1>
+                        <p class=" text-site-grey-secondary mb-2">{{  homeData?.carousel[0].program?.description.slice(0,70)  }}</p>
                         <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
                             <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
                                 <CalenderIcon />
@@ -75,8 +75,8 @@
                 </div>
                 <div class="custom-pagination2">
                     <button class="swiper-pagination-bullet bg-white p-3 w-fit" data-index="1">
-                        <h1 class="">الانوار الكاشفة</h1>
-                        <p class=" text-site-grey-secondary mb-2">بنامج فكري يصاحب فية الضيوف في ملتقي دعوي </p>
+                        <h1 class="">{{  homeData?.carousel[1].program?.name  }}</h1>
+                        <p class=" text-site-grey-secondary mb-2">{{  homeData?.carousel[1].program?.description.slice(0,70)  }}</p>
                         <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
                             <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
                                 <CalenderIcon />
@@ -92,8 +92,8 @@
                 </div>
                 <div class="custom-pagination3">
                     <button class="swiper-pagination-bullet bg-white p-3 w-fit" data-index="2">
-                        <h1 class="">القوافل المرئية</h1>
-                        <p class=" text-site-grey-secondary mb-2">حلقات مميزة</p>
+                        <h1 class="">{{  homeData?.carousel[2].program?.name  }}</h1>
+                        <p class=" text-site-grey-secondary mb-2">{{  homeData?.carousel[2].program?.description.slice(0,70)  }}</p>
                         <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
                             <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
                                 <CalenderIcon />
@@ -107,9 +107,26 @@
                         </div>
                     </button>
                 </div>
+                <!--                 <div v-for="(data,index) in homeData?.carousel" :key="index" class="custom-pagination">
+                    <button class="swiper-pagination-bullet bg-white p-3 w-fit" :data-index="index">
+                        <h1 class="">{{ data.program.name }}</h1>
+                        <p class=" text-site-grey-secondary mb-2">برنامج وثائقي تسجيلي يصاحب فية الضيوف في ملتقي دعوي</p>
+                        <div class="swiper-pagination-bullet-outerdiv flex justify-between items-center">
+                            <div class="flex items-center gap-1 swiper-pagination-bullet-innerdiv">
+                                <CalenderIcon />
+                                <span class=" text-site-grey-secondary">كل جمعة</span>
+                            </div>
+                            <div 
+                            class="swiper-pagination-bullet-button"
+                            >
+                                شاهد
+                            </div>
+                        </div>
+                    </button>
+                </div> -->
             </swiper-container>
         </section>
-        <section class="cards-section my-10 px-28">
+        <section v-if="homeData?.stop_places.length" class="cards-section my-10 px-28">
             <h1 class="text-5xl text-site-secondary font-bold mt-40 translate-y-[15px]">متابعة <span class=" text-site-primary">المشاهدة</span></h1>
             <swiper-container class="mySwiper2" pagination="true" init="false">
                 <swiper-slide v-for="(slide,index) in episodsContinue" :key="index" class="flex gap-2 pt-16">
@@ -150,7 +167,7 @@
                 </swiper-slide>
             </swiper-container>
         </section>
-        <section class="cards-section-2 my-10 px-28">
+<!--         <section class="cards-section-2 my-10 px-28">
             <div class="flex items-center gap-2 tag pt-10" >
                 <div class=" bg-site-primary text-white text-xs rounded-3xl px-3 py-2">
                     الكل
@@ -210,33 +227,20 @@
                     </RouterLink>  
                 </swiper-slide>
             </swiper-container>
-        </section>
-        <section class="cards-section-3 my-10 px-28">
-            <h1 class="text-5xl text-site-secondary font-bold mt-16 translate-y-[15px]"> الحلقات الأكثر <span class=" text-site-primary">مشاهدة</span></h1>
-            <swiper-container class="mySwiper4" pagination="true" init="false">
-                <swiper-slide v-for="(slide,index) in episods" :key="index" class="flex gap-2 pt-16">
-                    <div v-for="(ep,indexx) in slide" :key="indexx" class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center relative">
-                        <img :src="ep.image" alt="image" class="w-full h-full absolute">
-                        <VideoPlayIcon class=" relative z-10"/>
-                    </div>
-                </swiper-slide>
-<!--                 <swiper-slide class="flex gap-2 pt-16">
-                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
-                        <VideoPlayIcon />
-                    </div>
-                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
-                        <VideoPlayIcon />
-                    </div>
-                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
-                        <VideoPlayIcon />
-                    </div>
-                    <div class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center" style="background-image: url('/img/Video-thumbnail.png')">
-                        <VideoPlayIcon />
-                    </div>
-                </swiper-slide> -->
-            </swiper-container>
-        </section>
-        <section class="avatars-section my-10 px-28">
+        </section> -->
+        
+        <section v-for="(section, index) in homeData?.labes" :key="index" class="cards-section-3 my-10 px-28">
+    <h1 class="text-5xl text-site-secondary font-bold mt-16 translate-y-[15px]">{{ section.name }}</h1>
+    <swiper-container :class="'mySwiper4' + index" pagination="true" init="false">
+      <swiper-slide v-for="(slide, slideIndex) in episods[index]" :key="slideIndex" class="flex gap-2 pt-16">
+        <div v-for="(ep, epIndex) in slide" :key="epIndex" class="w-1/4 h-48 rounded-[20px] bg-contain flex justify-center items-center relative">
+          <img :src="ep.image" alt="image" class="w-full h-full absolute">
+          <VideoPlayIcon class="relative z-10"/>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </section>
+<!--         <section class="avatars-section my-10 px-28">
             <h1 class="text-5xl text-site-primary font-bold mt-28 mb-10">المحاضرين</h1>
             <div v-if="homeData?.instructors" class="flex justify-center gap-2 flex-wrap">
                 <div v-for="(ins,index) in homeData.instructors" :key="index" 
@@ -252,80 +256,8 @@
                         <span class=" text-[#4E5566] font-medium">{{ ins.title }}</span>
                     </div>
                 </div>
-                <!-- <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar2.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div>
-                <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar3.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div>
-                <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar4.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div>
-                <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar5.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div>
-                <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar3.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div>
-                <div class=" w-[153px] h-[191px] rounded-2xl bg-[#ebe9e5] flex flex-col items-center pt-6">
-                    <img src="/img/Avatar4.png" alt="avatar">
-                    <p class=" text-site-grey-secondary font-bold mt-2 mb-3">Emeka</p>
-                    <div class="flex items-center gap-2">
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.83398 2V12.6667H15.1673V2H1.83398ZM13.834 11.3333H3.16732V3.33333H13.834V11.3333Z" fill="#C4A159"/>
-                            <path d="M6.5 4.15601V10.5107L11.7953 7.33334L6.5 4.15601ZM7.83333 6.51067L9.20467 7.33334L7.83333 8.15601V6.51067Z" fill="#C4A159"/>
-                            <path d="M11.8346 13.3334H5.16797V14.6667H11.8346V13.3334Z" fill="#C4A159"/>
-                        </svg>
-                        <p class=" text-[#4E5566] font-medium ">معنا كلمة الله</p>
-                    </div>
-                </div> -->
             </div>
-        </section>
+        </section> -->
         <section class="Video-section my-10 px-28">
             <h1 class="text-5xl text-site-secondary font-bold mb-10" >البث <span class=" text-site-primary">المباشر</span></h1>
             <img class="px-20" src="/img/Video-section.png" alt="video">
@@ -384,9 +316,9 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { ref } from 'vue';
-import { useGetRequest } from '../composables/useRequest';
+import { onMounted, watch, watchEffect } from 'vue';
+import { ref, nextTick  } from 'vue';
+import { useGetRequest, useGetRequestNoToken } from '../composables/useRequest';
 import CalenderIcon from '../components/icon/CalenderIcon.vue';
 import VideoPlayIcon from '../components/icon/VideoPlayIcon.vue';
 import ArrowIcon from '../components/icon/ArrowIcon.vue';
@@ -399,18 +331,140 @@ const homeData = ref()
 const episods = ref([])
 const episodsContinue = ref([])
 onMounted( async ()=>{
-    const { Data, Error} = await useGetRequest('home/')
+    const { Data, Error} = await useGetRequestNoToken('homev2/')
     homeData.value = Data.value.data
+/*     const { Data, Error} = await useGetRequest('home/')
+    homeData.value = home.value.data */
     let counter = 0
-    for (let i = 0; i < homeData.value.episodes.length; i+=4) {
-        episods.value.push(homeData.value.episodes.slice(i,i+4))
-        counter++
-    }
+/*     homeData.value.labes.sort((a, b) => a.sort - b.sort)
+    for (let j = 0; j < homeData.value.labes.length; j++) {
+  const programs = homeData.value.type_label ? homeData.value.labes[j].programs : homeData.value.labes[j].episodes;
+  for (let i = 0; i < programs.length; i += 4) {
+    if(i == 0)
+        episods.value[j] = []
+    episods.value[j].push([programs.slice(i, i + 4)]);
+  }
+}
+console.log(episods.value) */
+
+/*     console.log(episods.value) */
     counter = 0
     for (let i = 0; i < homeData.value.stop_places.length; i+=4) {
         episodsContinue.value.push(homeData.value.stop_places.slice(i,i+4))
         counter++
     }
+    if(homeData.value.stop_places.length) {
+        const swiperEl2 = document.querySelector('.mySwiper2');
+        const params2 = {
+            injectStyles: [`
+            .swiper-pagination {
+                justify-content: center !important;
+                display: flex !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 40% !important;
+            }
+            .swiper-pagination-bullet {
+                width: 2rem;
+                height: 6px;
+                border-radius: 8px;
+                background-color: #DBD9D1
+            }
+      
+            .swiper-pagination-bullet-active {
+                 background-color: #C4A159
+            }
+            `],
+          }  
+        Object.assign(swiperEl2, params2)
+        swiperEl2.initialize();
+    }
+
+   /* const swiperEl3 = document.querySelector('.mySwiper3');
+    const params3 = {
+        injectStyles: [`
+        .swiper-pagination {
+            justify-content: center !important;
+            display: flex !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 40% !important;
+        }
+        .swiper-pagination-bullet {
+            width: 2rem;
+            height: 6px;
+            border-radius: 8px;
+            background-color: #262626;
+            opacity: 1;
+        }
+  
+        .swiper-pagination-bullet-active {
+             background-color: #C4A159
+        }
+        `],
+      }  
+     Object.assign(swiperEl3, params3)
+    swiperEl3.initialize(); */
+
+})
+
+watchEffect(() => {
+      if (homeData?.value?.labes) {
+        homeData.value.labes.sort((a, b) => a.sort - b.sort)
+        episods.value = homeData.value.labes.map(label => {
+          const programs = label.type_label ? label.programs : label.episodes;
+          const chunks = [];
+          for (let i = 0; i < programs.length; i += 4) {
+            chunks.push(programs.slice(i, i + 4));
+          }
+          return chunks;
+        });
+        console.log(episods.value)
+      }
+    });
+
+    const initializeSwipers = () => {
+  nextTick(() => {
+    homeData.value.labes.forEach((_, index) => {
+      const swiperEl = document.querySelector(`.mySwiper4${index}`);
+      if (swiperEl) {
+        Object.assign(swiperEl, {
+          injectStyles: [
+            `
+            .swiper-pagination {
+              justify-content: center !important;
+              display: flex !important;
+              top: 0 !important;
+              left: 0 !important;
+              right: 40% !important;
+            }
+            .swiper-pagination-bullet {
+              width: 2rem;
+              height: 6px;
+              border-radius: 8px;
+              background-color: #262626;
+              opacity: 1;
+            }
+            .swiper-pagination-bullet-active {
+              background-color: #C4A159;
+            }
+            `
+          ],
+        });
+        swiperEl.initialize();
+      }
+    });
+  });
+};
+
+     // Initialize Swipers after the DOM has been updated
+     watchEffect(() => {
+      if (episods.value.length > 0) {
+        initializeSwipers();
+      }
+    });
+
+watch(homeData, ()=> {
     const swiperEl = document.querySelector('.mySwiper');
     const customPagination1 = document.querySelector('.custom-pagination');
     const customPagination2 = document.querySelector('.custom-pagination2');
@@ -493,58 +547,9 @@ onMounted( async ()=>{
       }  
     Object.assign(swiperEl, params)
     swiperEl.initialize();
+})
 
-    const swiperEl2 = document.querySelector('.mySwiper2');
-    const params2 = {
-        injectStyles: [`
-        .swiper-pagination {
-            justify-content: center !important;
-            display: flex !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 40% !important;
-        }
-        .swiper-pagination-bullet {
-            width: 2rem;
-            height: 6px;
-            border-radius: 8px;
-            background-color: #DBD9D1
-        }
-  
-        .swiper-pagination-bullet-active {
-             background-color: #C4A159
-        }
-        `],
-      }  
-    Object.assign(swiperEl2, params2)
-    swiperEl2.initialize();
-
-    const swiperEl3 = document.querySelector('.mySwiper3');
-    const params3 = {
-        injectStyles: [`
-        .swiper-pagination {
-            justify-content: center !important;
-            display: flex !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 40% !important;
-        }
-        .swiper-pagination-bullet {
-            width: 2rem;
-            height: 6px;
-            border-radius: 8px;
-            background-color: #262626;
-            opacity: 1;
-        }
-  
-        .swiper-pagination-bullet-active {
-             background-color: #C4A159
-        }
-        `],
-      }  
-    Object.assign(swiperEl3, params3)
-    swiperEl3.initialize();
-
+/* watch(episods, ()=> {
     const swiperEl4 = document.querySelector('.mySwiper4');
     const params4 = {
         injectStyles: [`
@@ -567,10 +572,18 @@ onMounted( async ()=>{
              background-color: #C4A159
         }
         `],
-      }  
-    Object.assign(swiperEl4, params4)
-    swiperEl4.initialize();
-})
+      }
+      console.log(swiperEl4)
+    if(swiperEl4) {
+        Object.assign(swiperEl4, params4)
+        swiperEl4.initialize();
+    }
+}, {deep: true}) */
+
+const onSwiperReady = ()=> {
+    const swiperEl4 = document.querySelector('.mySwiper40');
+    console.log(swiperEl4)
+}
 </script>
 
 <style>
