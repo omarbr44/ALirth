@@ -98,7 +98,7 @@ const signinRequest = async () => {
         requestConditions.value.error = Error.value
     else if(requestConditions.value.data) {
         userStore.signIn(requestConditions.value.data.authtoken,requestConditions.value.data.is_superuser,requestConditions.value.data.full_name,requestConditions.value.data.email,requestConditions.value.data.package_name,requestConditions.value.data.package_number)
-        router.push('/home')
+        router.push('/')
     }
 
 }

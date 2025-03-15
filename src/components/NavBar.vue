@@ -113,7 +113,7 @@
       </RouterLink>
 
       <!-- Auth Buttons (Desktop) -->
-      <div class="hidden lg:flex items-center gap-4">
+      <div v-if="!userStore.userName" class="hidden lg:flex items-center gap-4">
         <RouterLink
           to="/signup"
           class="bg-site-primary text-white py-3 px-4 rounded-lg"
@@ -126,6 +126,19 @@
         >
           تسجيل الدخول
         </RouterLink>
+      </div>
+      <div v-else class="hidden lg:flex items-center gap-4">
+        <span 
+            class="text-site-primary py-3 px-4 rounded-lg dark:text-white d-rtl"
+        >
+          {{ userStore.userName }} اهلا
+        </span>
+        <button
+          @click="logout"
+          class="bg-white text-site-primary py-3 px-4 rounded-lg dark:bg-gray-800 dark:text-white"
+        >
+          تسجيل الخروج
+        </button>
       </div>
 
       <!-- Mobile Menu (Dropdown) -->
@@ -156,7 +169,7 @@
             />
           </svg>
         </RouterLink>
-        <div class="flex flex-col gap-2 px-4 py-2">
+        <div v-if="!userStore.userName" class="flex flex-col gap-2 px-4 py-2">
           <RouterLink
             to="/signup"
             class="bg-site-primary text-white py-2 px-4 rounded-lg text-center"
@@ -170,6 +183,19 @@
             تسجيل الدخول
           </RouterLink>
         </div>
+        <div v-else class="flex flex-col gap-2 px-4 py-2">
+          <span 
+            class="text-site-primary py-3 px-4 rounded-lg dark:text-white d-rtl"
+        >
+          {{ userStore.userName }} اهلا
+        </span>
+        <button
+          @click="logout"
+          class="bg-white text-site-primary py-3 px-4 rounded-lg dark:bg-gray-800 dark:text-white"
+        >
+          تسجيل الخروج
+        </button>
+        </div>
       </div>
     </nav>
   </div>
@@ -177,9 +203,12 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { useUserStore } from '../stores/user';
 
+const userStore = useUserStore()
 const route = useRoute()
+const router = useRouter()
 
 onMounted(() => {
   // Check localStorage for dark mode preference
@@ -202,6 +231,11 @@ const toggleDarkMode = () => {
 }
 // Toggle dark mode
 document.documentElement.classList.toggle('dark');
+
+const logout = () => {
+  userStore.signOut()
+  router.push('/login')
+}
 </script>
 
 <style scoped>
