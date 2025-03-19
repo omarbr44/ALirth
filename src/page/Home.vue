@@ -353,6 +353,11 @@ watch(homeData, ()=> {
             justify-content: center !important;
             display: flex !important;
         }
+            @media(max-width: 700px) {
+  .swiper-pagination {
+    display: none !important;
+  }
+}
         .swiper-pagination-bullet {
             opacity: 1;
             width: 20%;
@@ -465,7 +470,3 @@ const onSwiperReady = ()=> {
     console.log(swiperEl4)
 }
 </script>
-
-<style>
-
-</style>
