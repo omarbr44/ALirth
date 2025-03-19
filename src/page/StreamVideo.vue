@@ -1,9 +1,10 @@
 <template>
-    <div class="flex h-fit w-full bg-site-dark-primary">
+    <div class="flex flex-col lg:flex-row h-fit w-full bg-site-dark-primary">
         <template v-if="pageLoaded">
-            <div class="w-[70%]"
+            <!-- Video Container -->
+            <div class="w-full lg:w-[70%]"
                  :class="videoFull ? 'w-full' : ''">
-                <div class="flex justify-between items-center pt-10 px-10">
+                <div class="flex justify-between items-center pt-10 px-4 lg:px-10">
                     <div class="flex gap-4 items-center text-white">
                         <button @click="videoFull = !videoFull" class="bg-[#262011] p-3">
                             <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,42 +22,17 @@
                     <span>></span>
                     </RouterLink>
                 </div>
-                <div class=" w-full pb-8 pt-24 px-4">
-                        <video ref="video" onclick="play(event)" :src="currentEpisode.video_file" id="video" class="w-full h-full"></video>
+                <div class="w-full pb-8 pt-24 px-4">
+                    <video ref="video" onclick="play(event)" :src="currentEpisode.video_file" id="video" class="w-full h-full rounded-lg"></video>
                 </div>
-                <div class="">
-                            <div class="timeline px-2">
-                                <div class="bar">
-                                    <div class="inner"></div>
-                                </div>
-                            </div>
-                        </div>
-    
-            </div>
-            <div class=" px-6 flex flex-col gap-6 overflow-auto mt-24 mb-16 h-[35rem]"
-                 :class="videoFull ? 'hidden' : ''">
-                 <div class="select-container my-10">
-                    <select v-model="seasonValue">
-                        <option value="" selected>اختر الخطة</option>
-                        <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
-                    </select>
-                </div>
-                <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class="flex items-center gap-4">
-                    <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="img" class="w-32 h-18 rounded-lg">
-                    <div>
-                        <p class="text-white font-semibold mb-4">{{ ep.name }}</p>
-                        <p class=" text-[#BFBCB0] text-sm">{{ turnSecondsToHour(ep.time) }}</p>
+                <div class="timeline px-2">
+                    <div class="bar">
+                        <div class="inner"></div>
                     </div>
-                </RouterLink>
-            </div>       
-        </template>
-        <div v-else class=" h-screen w-full flex justify-center items-center">
-            <LoaderIcon />
-        </div>
-    </div>
-    <div class="pb-5 pl-16 pr-10 flex items-center justify-between bg-site-dark-primary" v-if="pageLoaded">
-        <div class="flex gap-8 items-center">
-            <button >
+                </div>
+                <div class="mt-8 pb-5 pl-4 lg:pl-16 pr-4 lg:pr-10 flex items-center justify-between bg-site-dark-primary" v-if="pageLoaded">
+        <div class="flex gap-4 lg:gap-8 items-center">
+            <button>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.76172 7.22V16.79C3.76172 18.75 5.89172 19.98 7.59172 19L11.7417 16.61L15.8917 14.21C17.5917 13.23 17.5917 10.78 15.8917 9.8L11.7417 7.4L7.59172 5.01C5.89172 4.03 3.76172 5.25 3.76172 7.22Z" fill="#9A9384"/>
                 <path d="M20.2383 18.93C19.8283 18.93 19.4883 18.59 19.4883 18.18V5.82001C19.4883 5.41001 19.8283 5.07001 20.2383 5.07001C20.6483 5.07001 20.9883 5.41001 20.9883 5.82001V18.18C20.9883 18.59 20.6583 18.93 20.2383 18.93Z" fill="#9A9384"/>
@@ -65,7 +41,7 @@
             <button @click="forward(event)">
                 <VideoForward />
             </button>
-            <button class=" rounded-full p-1 bg-site-primary size-14 flex items-center justify-center" @click="play(event)">
+            <button class="rounded-full p-1 bg-site-primary size-10 lg:size-14 flex items-center justify-center" @click="play(event)">
                 <VideoPlayIcon v-if="videoStopped"/>
                 <VideoPauseIcon v-else />
             </button>
@@ -101,6 +77,30 @@
                 <path d="M16.9688 7.26999C16.5588 7.26999 16.2188 6.92999 16.2188 6.51999V2.10999C16.2188 1.69999 16.5588 1.35999 16.9688 1.35999C17.3787 1.35999 17.7188 1.69999 17.7188 2.10999V6.51999C17.7188 6.93999 17.3787 7.26999 16.9688 7.26999Z" fill="#BFBCB0"/>
                 </svg>
             </button>
+        </div>
+    </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="px-4 lg:px-6 flex flex-col gap-6 overflow-auto mt-8 lg:mt-24 mb-16 h-[35rem]"
+                 :class="videoFull ? 'hidden' : ''">
+                 <div class="select-container my-10">
+                    <select v-model="seasonValue">
+                        <option value="" selected>اختر الخطة</option>
+                        <option v-for="(season,index) in seasons" :key="index" :value="season.id">{{ season.name }}</option>
+                    </select>
+                </div>
+                <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class="flex items-center gap-4">
+                    <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="img" class="w-32 h-18 rounded-lg">
+                    <div>
+                        <p class="text-white font-semibold mb-4">{{ ep.name }}</p>
+                        <p class="text-[#BFBCB0] text-sm">{{ turnSecondsToHour(ep.time) }}</p>
+                    </div>
+                </RouterLink>
+            </div>       
+        </template>
+        <div v-else class="h-screen w-full flex justify-center items-center">
+            <LoaderIcon />
         </div>
     </div>
 </template>
@@ -275,7 +275,8 @@ const forward = (e) => {
 }
 .select-container {
     position: relative;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
 }
 .select-container select {
     width: 100%;
