@@ -202,7 +202,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '../stores/user';
 
@@ -224,6 +224,10 @@ const isDarkMode = ref()
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
+
+watch(route, () => {
+  toggleMenu()
+}, {deep: true})
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
   document.documentElement.classList.toggle('dark', isDarkMode.value)
