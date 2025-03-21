@@ -171,7 +171,7 @@
               <a class="mb-2 block sm:text-sm">الشروط والأحكام</a>
               <a class="mb-2 block sm:text-sm">سياسة الخصوصية</a>
             </div>
-            <div class="w-1/3 lg:w-1/2 sm:w-full mb-8 sm:mb-6">
+            <div class="w-full mb-8 sm:mb-6">
               <p class="font-bold mb-4 sm:text-lg">تحميل التطبيق</p>
               <img class="mb-2 w-48 sm:w-36" src="/img/download-app.png" alt="download-app" />
               <img class="w-48 sm:w-36" src="/img/download-app2.png" alt="download-app" />

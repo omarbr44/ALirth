@@ -10,7 +10,7 @@
           {{ teacher.name }}
           </h1>
           <p class="text-[#9E9C9C] mt-5">{{ teacher.description  }}</p>
-          <div class="mt-24 md:mt-16 sm:mt-10 translate-x-36 md:translate-x-20 sm:translate-x-0">
+<!--           <div class="mt-24 md:mt-16 sm:mt-10 translate-x-36 md:translate-x-20 sm:translate-x-0">
             <p class="font-bold text-site-primary mb-5">الأكثر مشاهدة</p>
             <div class="flex sm:flex-wrap gap-5">
               <img src="/img/Video-thumbnail.png" alt="img" class="w-1/4 sm:w-[45%]">
@@ -18,7 +18,7 @@
               <img src="/img/Video-thumbnail.png" alt="img" class="w-1/4 sm:w-[45%]">
               <img src="/img/Video-thumbnail.png" alt="img" class="w-1/4 sm:w-[45%]">
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="w-full border-b text-white p-2 mt-20 flex items-center gap-3">
@@ -27,7 +27,11 @@
             </div>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
               <RouterLink v-for="(program,index) in programs" :key="index" :to="'/stream/'+program.id" class=" bg-site-dark-primary w-[30%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img :src="program.image" class="w-full" alt="Course-Images">
+                      <div 
+                        class="w-full h-[200px] rounded-[20px]"
+                      >
+                        <img :src="program.image" class="w-full rounded-[20px]" alt="Course-Images">
+                      </div> 
                         <!-- <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
                             <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                         </div> -->

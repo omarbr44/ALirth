@@ -28,14 +28,14 @@
                         >
                             استكمال المشاهدة
                         </RouterLink>
-                        <button class="flex justify-center items-center p-2 border rounded-full border-white">
+<!--                         <button class="flex justify-center items-center p-2 border rounded-full border-white">
                             <HeartIcon />
-                        </button>
+                        </button> -->
                     </div>
-                    <button class="flex items-center gap-4 text-white mt-4 lg:mt-0">
+<!--                     <button class="flex items-center gap-4 text-white mt-4 lg:mt-0">
                         <span class="text-lg">share</span>
                         <ShareIcon />
-                    </button>
+                    </button> -->
                 </div>
             </section>
 
@@ -43,9 +43,9 @@
             <section class="cards-section my-10 px-4 lg:px-16">
                 <div class="flex flex-col lg:flex-row items-center gap-4 text-[#BFBCB0]">
                     <p class="text-site-primary border-b border-site-primary pb-1">الحلقات</p>
-                    <p class="pb-1">المزيد من المعلومات</p>
+<!--                     <p class="pb-1">المزيد من المعلومات</p>
                     <p class="pb-1">ذات صلة</p>
-                    <p class="pb-1">عن الشيخ محمد</p>
+                    <p class="pb-1">عن الشيخ محمد</p> -->
                 </div>
                 <div class="w-full h-[1px] bg-[#807D6B]"></div>
                 <div class="select-container my-10">

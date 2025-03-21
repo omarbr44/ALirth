@@ -2,7 +2,7 @@
     <div class="dark:bg-black overflow-hidden w-full">
       <section v-if="!pageLoad" class="cards-section mt-64 mb-20 px-28 md:px-20 sm:px-8 ">
             <h1 class="text-5xl sm:text-3xl dark:text-white font-bold mt-12 text-center">كل <span class="text-site-primary">البرامج</span> الدينية التي تفضلها</h1>
-            <h1 class="text-5xl sm:text-3xl dark:text-white font-bold mt-20 translate-y-[15px]"> الحلقات الأكثر <span class=" text-site-primary">مشاهدة</span></h1>
+<!--             <h1 class="text-5xl sm:text-3xl dark:text-white font-bold mt-20 translate-y-[15px]"> الحلقات الأكثر <span class=" text-site-primary">مشاهدة</span></h1>
             <div class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
                 <div v-for="index in 4" class=" bg-site-dark-primary w-[23%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
                         <img src="/img/Course-Images.png" class="w-full" alt="Course-Images">
@@ -38,13 +38,18 @@
                             </div>
                         </div>
                 </div>
-            </div>
+            </div> -->
             <div class="w-full text-white p-2 mt-20 flex flex-wrap items-center gap-3">
                 <button @click="changeCategory('')" class=" rounded-3xl px-3 py-1" :class="selectedCategory == '' ? 'bg-site-primary' : 'bg-site-secondary'">الكل</button>
                 <button v-for="(cat,index) in categories" :key="index" @click="changeCategory(cat.id)" class=" rounded-3xl px-3 py-1" :class="selectedCategory == cat.id ? 'bg-site-primary' : 'bg-site-secondary'">{{ cat.name }}</button>
             </div>
             <div v-if="!categoryLoad" class="flex items-center gap-5 gap-y-10 my-10 flex-wrap">
                 <RouterLink v-for="(program,index) in programes" :key="index" :to="'/stream/'+program.id" class=" bg-site-dark-primary w-[30%] sm:w-full md:w-[47%] min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
+                      <div 
+                        class="w-full h-[200px] rounded-[20px]"
+                      >
+                      <img :src="program.image" class="w-full rounded-[20px]" alt="Course-Images">
+                      </div>  
                         <div class="flex px-4 justify-between items-center my-2">
                             <h1 class=" text-2xl font-semibold gradiant-text"
                             style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);"
@@ -60,7 +65,7 @@
                               {{ tag.name }}
                           </div>
                         </div>
-                        <p class="px-4 text-white mb-3">{{ program.description }}</p>
+                        <p class="px-4 text-white mb-3">{{ program.description.slice(0,100) }}</p>
                         <hr>
                         <div class="flex px-4 items-center justify-between my-4">
                             <div class="flex gap-2 items-center">
