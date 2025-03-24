@@ -225,8 +225,8 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-watch(route, () => {
-  toggleMenu()
+watch(route, (old) => {
+  isMenuOpen.value = false
 }, {deep: true})
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
