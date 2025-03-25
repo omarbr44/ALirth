@@ -145,7 +145,9 @@
           <h1 class="text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mb-10">
             البث <span class="text-site-primary">المباشر</span>
           </h1>
-          <img class="px-20 md:px-10 sm:px-4" src="/img/Video-section.png" alt="video" />
+          <RouterLink to="/live">
+            <img class="px-20 md:px-10 sm:px-4" src="/img/Video-section.png" alt="video" />
+          </RouterLink>
         </section>
   
         <!-- Footer -->
@@ -291,8 +293,8 @@ watchEffect(() => {
         episods.value = homeData.value.labes.map(label => {
           const programs = label.type_label ? label.programs : label.episodes;
           const chunks = [];
-          for (let i = 0; i < programs.length; i += 4) {
-            chunks.push(programs.slice(i, i + 4));
+          for (let i = 0; i < programs.length; i += 3) {
+            chunks.push(programs.slice(i, i + 3));
           }
           return chunks;
         });
