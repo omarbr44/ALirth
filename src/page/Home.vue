@@ -361,6 +361,12 @@ watchEffect(() => {
             .swiper-pagination-bullet-active {
               background-color: #C4A159;
             }
+            @media(max-width: 700px) {
+              .swiper-pagination {
+                display: none !important;
+              }
+            }
+  
             `
           ],
         });
