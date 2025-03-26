@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#F8F8F7] overflow-hidden">
+    <div class="bg-[#F8F8F7] dark:bg-black overflow-hidden">
       <!-- Hero Swiper Section -->
       <section class="hero-swiper">
         <swiper-container class="mySwiper" init="false">
@@ -72,7 +72,7 @@
       <!-- Continue Watching Section -->
       <template v-if="!pageLoad">
         <section v-if="homeData?.stop_places.length" class="cards-section my-10 px-28 md:px-20 sm:px-8">
-          <h1 class="text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mt-40 translate-y-[15px]">
+          <h1 class="text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mt-40 translate-y-[15px] dark:text-white">
             متابعة <span class="text-site-primary">المشاهدة</span>
           </h1>
           <swiper-container class="mySwiper2" pagination="true" init="false">
@@ -122,7 +122,7 @@
   
         <!-- Label Sections -->
         <section v-for="(section, index) in homeData?.labes" :key="index" class="cards-section-3 my-10 px-28 md:px-20 sm:px-8">
-          <h1 class="text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mt-16 translate-y-[15px]">
+          <h1 class="dark:text-white text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mt-16 translate-y-[15px]">
             {{ section.name }}
           </h1>
           <swiper-container :class="'mySwiper4' + index" pagination="true" init="false">
@@ -133,7 +133,7 @@
                 :to="section.type_label ? '/stream/' + ep.id : '/stream-video/' + ep.id"
                 class="w-1/4 lg:w-1/3 md:w-1/2 sm:w-full h-48 rounded-[20px] bg-contain flex justify-center items-center relative"
               >
-                <img :src="ep.image" alt="image" class="w-full h-full absolute" />
+                <img :src="ep.image" alt="image" class="w-full h-full absolute bg-site-dark-primary" />
                 <VideoPlayIcon class="relative z-10" />
               </RouterLink>
             </swiper-slide>
@@ -142,7 +142,7 @@
   
         <!-- Video Section -->
         <section class="Video-section my-10 px-28 md:px-20 sm:px-8">
-          <h1 class="text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mb-10">
+          <h1 class="text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-site-secondary font-bold mb-10 dark:text-white">
             البث <span class="text-site-primary">المباشر</span>
           </h1>
           <RouterLink to="/live">
@@ -151,38 +151,71 @@
         </section>
   
         <!-- Footer -->
-        <footer class="bg-white w-full rounded-s-3xl rounded-e-3xl pt-10">
-          <div class="flex justify-evenly w-full flex-wrap px-28 md:px-20 sm:px-8">
-            <div class="w-1/3 lg:w-1/2 sm:w-full mb-8 sm:mb-6">
-              <img src="/img/Logo.png" alt="logo" class="w-24 h-auto sm:w-20" />
-              <p class="text-site-secondary font-medium text-2xl lg:text-xl md:text-lg sm:text-base my-3">
-                Alerth Alnabawi
+        <footer class="bg-black w-full rounded-s-3xl rounded-e-3xl pt-10">
+        <div class="">
+          <!-- Footer Content -->
+          <div class="flex flex-col lg:flex-row justify-between gap-8 lg:gap-16 px-20">
+            <!-- Logo and Contact Info -->
+            <div class="text-center lg:text-left">
+              <img src="/img/Logo.png" alt="logo" class="mx-auto lg:mx-0" />
+              <p class="text-white font-medium text-2xl my-3">Alerth Alnabawi</p>
+              <p class="text-white mb-5">
+                support@Alerth.com<br />
+                +1 (040) 2351 3690
               </p>
-              <p class="text-[#222222] mb-5 w-1/2 lg:w-full sm:w-full sm:text-sm">
-                support@Alerth.com +1 (040) 2351 3690
-              </p>
-              <div class="flex gap-6 items-center w-full">
-                <!-- SVG Icons (Replace with your SVGs) -->
+              <div class="flex justify-center lg:justify-start gap-6">
+                <!-- Social Icons -->
+                <a href="#" class="text-white hover:text-site-primary transition-colors">
+                  <svg width="26" height="27" viewBox="0 0 26 27" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- SVG Path -->
+                  </svg>
+                </a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- SVG Path -->
+                  </svg>
+                </a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- SVG Path -->
+                  </svg>
+                </a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- SVG Path -->
+                  </svg>
+                </a>
               </div>
             </div>
-            <div class="w-1/3 lg:w-1/2 sm:w-full mb-8 sm:mb-6">
-              <p class="font-bold mb-4 sm:text-lg">الروابط</p>
-              <a class="mb-2 block sm:text-sm">الرئيسية</a>
-              <a class="mb-2 block sm:text-sm">اتصل بنا</a>
-              <a class="mb-2 block sm:text-sm">مركز خدمة العملاء</a>
-              <a class="mb-2 block sm:text-sm">الشروط والأحكام</a>
-              <a class="mb-2 block sm:text-sm">سياسة الخصوصية</a>
+
+            <!-- Links Section -->
+            <div class="text-center lg:text-left">
+              <p class="font-bold mb-4 text-white">الروابط</p>
+              <div class="flex flex-col gap-2">
+                <a href="#" class="text-white hover:text-site-primary transition-colors">الرئيسية</a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">اتصل بنا</a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">مركز خدمة العملاء</a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">الشروط والأحكام</a>
+                <a href="#" class="text-white hover:text-site-primary transition-colors">سياسة الخصوصية</a>
+              </div>
             </div>
-            <div class="w-full mb-8 sm:mb-6">
-              <p class="font-bold mb-4 sm:text-lg">تحميل التطبيق</p>
-              <img class="mb-2 w-48 sm:w-36" src="/img/download-app.png" alt="download-app" />
-              <img class="w-48 sm:w-36" src="/img/download-app2.png" alt="download-app" />
+
+            <!-- Download App Section -->
+            <div class="text-center lg:text-left">
+              <p class="font-bold mb-4 text-white">تحميل التطبيق</p>
+              <div class="flex flex-col gap-2">
+                <img src="/img/download-app.png" alt="download-app" class="mx-auto lg:mx-0" />
+                <img src="/img/download-app2.png" alt="download-app" class="mx-auto lg:mx-0" />
+              </div>
             </div>
           </div>
-          <div class="w-full bg-site-primary text-white text-center font-bold py-6 mt-8 sm:text-sm">
+
+          <!-- Copyright Section -->
+          <div class="w-full bg-site-primary text-white text-center font-bold py-6 mt-8">
             جميع الحقوق محفوظة 2024
           </div>
-        </footer>
+        </div>
+      </footer>
       </template>
     </div>
     <div v-if="pageLoad" class="h-screen flex justify-center items-center">
