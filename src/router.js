@@ -75,6 +75,21 @@ const router = createRouter({
       name: 'programs',
       component: () => import('./page/Programsindex.vue'),
     },
+    {
+      path: '/live',
+      name: 'live',
+      component: () => import('./page/Live.vue'),
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: () => import('./page/PlayList.vue'),
+    },
+    {
+      path: '/favorite-detailes/:id',
+      name: 'favorite-detailes',
+      component: () => import('./page/PlayListDetailes.vue'),
+    },
   ],
 });
 /* router.beforeEach((to, from, next) => {

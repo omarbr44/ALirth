@@ -55,8 +55,11 @@
                     </select>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-5 my-10">
-                    <RouterLink v-for="(ep,index) in episodes" :key="index" :to="'/stream-video/'+ep.id" class="bg-site-dark-primary w-full min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
-                        <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="Course-Images" class="w-full h-2/5">
+                    <div v-for="(ep,index) in episodes" :key="index" class="bg-site-dark-primary w-full min-h-[312px] border border-[#2D2D2D] rounded-[20px]">
+                              <RouterLink 
+                                :to="'/stream-video/'+ep.id">
+                                <img :src="ep.image ? ep.image :'/img/Course-Images.png'" alt="Course-Images" class="w-full h-2/5 rounded-[20px]">
+                              </RouterLink>
                         <div class="w-full flex bg-[#C0C0C0] rounded-full -translate-y-1">
                             <div class="w-[70%] flex bg-site-primary rounded-full py-1"></div>
                         </div>
@@ -64,9 +67,51 @@
                             <h1 class="text-2xl font-semibold gradiant-text" style="background-image: linear-gradient(90deg, #FFFFFF 0%, #C4A159 100%);">
                                 عنوان الحلقة
                             </h1>
-                            <button>
-                                <DotsIcon />
-                            </button>
+                            <div class="relative" ref="dropdownRef">
+    <!-- Button -->
+    <button 
+      @click="toggleDropdown(index)"
+      class="p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      <DotsIcon />
+    </button>
+
+    <!-- Dropdown Menu -->
+    <transition
+  enter-active-class="transition ease-out duration-100"
+  enter-from-class="transform opacity-0 scale-95"
+  enter-to-class="transform opacity-100 scale-100"
+  leave-active-class="transition ease-in duration-75"
+  leave-from-class="transform opacity-100 scale-100"
+  leave-to-class="transform opacity-0 scale-95"
+>
+<div
+      v-show="openStates[index]"
+      class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-100"
+    >
+      <button
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
+        @click="openFavoriteModal(ep.id, index)"
+      >
+        إضافة إلى المفضلة
+      </button>
+      <RouterLink 
+        :to="'/stream-video/'+ep.id"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
+      >
+        الذهاب إلى {{ ep.name }}
+      </RouterLink>
+      <RouterLink 
+        :to="'/teacher-view/'+ep.instructor.id"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
+      >
+        الذهاب إلى {{ ep.instructor.name }}
+      </RouterLink>
+    </div>
+</transition>
+
+  </div>
+
                         </div>
                         <div class="flex px-4 justify-between items-center mb-4">
                             <p class="text-white font-bold">{{ ep.name }}</p>
@@ -85,9 +130,39 @@
                                 <ClockIcon />
                             </div>
                         </div>
-                    </RouterLink>
+                    </div>
                 </div>
             </section>
+            <!-- Modal Overlay -->
+            <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <!-- Modal Content -->
+              <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-11/12 md:w-1/2 lg:w-1/3">
+                <h2 class="text-lg font-bold mb-4 dark:text-white">اختر قائمة التشغيل</h2>
+                <form @submit.prevent="addTofavorite">
+                    <div class="">
+                        <div v-for="(list,index) in playlists" :key="index" class="flex items-center ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
+                            <input id="bordered-radio-1" v-model="selectedPlaylist" type="radio" :value="list.id" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ list.name }}</label>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-7">
+                        <button
+                            class="p-2 dark:text-white bg-site-primary rounded focus:outline-none font-bold"
+                        >
+                            <span v-if="!loadingRequest">إضافة</span>
+                            <LoaderIcon v-else />
+                        </button>
+                        <!-- Close Button -->
+                        <button
+                          @click="closeModal"
+                          class="p-2 bg-red-500 text-white rounded focus:outline-none"
+                        >
+                        <span>إغلاق</span>
+                        </button>
+                    </div>
+                </form>
+              </div>
+            </div>
         </template>
         <div v-else class="h-screen flex justify-center items-center">
             <LoaderIcon />
@@ -145,7 +220,7 @@ import ShareIcon from '../components/icon/ShareIcon.vue'
 import DotsIcon from '../components/icon/3DotsIcon.vue'
 import ClockIcon from '../components/icon/ClockIcon.vue'
 import { onMounted, ref, watch } from 'vue';
-import { useGetRequest } from '../composables/useRequest';
+import { useGetRequest, usePostRequest } from '../composables/useRequest';
 import { RouterLink,useRoute } from 'vue-router';
 import turnSecondsToHour from '../composables/useSecondsToHour';
 import LoaderIcon from '../components/icon/loaderIcon.vue';
@@ -167,6 +242,7 @@ onMounted(async ()=>{
   seasonValue.value = seasons.value[0].id
   pageLoad.value = false
 
+  /* document.addEventListener('click', handleClickOutside); */
 })
 
 watch(seasonValue, async ()=>{
@@ -174,6 +250,64 @@ watch(seasonValue, async ()=>{
     episodes.value = Data.value.data.result
     console.log(episodes.value)
 })
+
+const openStates = ref({}); // Track open state for each item
+const dropdownRef = ref(null);
+
+const toggleDropdown = (index) => {
+  openStates.value = {
+    ...openStates.value,
+    [index]: !openStates.value[index]
+  };
+};
+
+const closeDropdown = (index) => {
+  openStates.value = {
+    ...openStates.value,
+    [index]: false
+  };
+};
+
+const loadingRequest = ref(false)
+
+/* const handleClickOutside = (event) => {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
+    isOpen.value = false;
+  }
+}; */
+
+const isModalOpen = ref(false)
+const playlists = ref()
+const selectedEp = ref()
+const selectedPlaylist = ref()
+
+const openFavoriteModal = async (id, index) => {
+    selectedEp.value = id
+
+    closeDropdown(index)
+
+    const { Data } = await useGetRequest('accounts/play_lists/')
+    playlists.value = Data.value.data.result
+
+    isModalOpen.value = true
+}
+
+const closeModal = () => {
+    isModalOpen.value = false
+}
+
+const addTofavorite = async () => {
+    loadingRequest.value = true
+
+    const body = {
+        playlist: selectedPlaylist.value, 
+        episode: selectedEp.value, 
+    }
+    const { Data, Error} = await usePostRequest('accounts/episode_addition/', body)
+
+    loadingRequest.value = false
+    closeModal()
+}
 </script>
 
 <style scoped>
